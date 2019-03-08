@@ -1,0 +1,11 @@
+package loader;
+
+import java.awt.image.BufferedImage;
+
+public class Loader {
+
+	public static BufferedImage loadImage(String path) {
+		
+	}
+	
+}

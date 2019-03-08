@@ -1,0 +1,17 @@
+package loader;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class Loader {
+
+	public static BufferedImage loadImage(String name) {
+		BufferedImage image;
+		try {
+			image = ImageIO.read(new File(path));
+		}
+	}
+	
+}

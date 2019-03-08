@@ -1,0 +1,40 @@
+package gui;
+
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.ImageObserver;
+import java.util.List;
+
+import display.GameWindow;
+import structures.Vec2;
+
+
+public class GuiManager {
+	
+	private List<GuiElement> guiElements;
+	
+	public GuiManager(List<GuiElement> guiElements) {
+		this.guiElements = guiElements;
+	}
+	
+	public void render(List<GuiElement> guiElements, Graphics g, ImageObserver observer) {
+		for(GuiElement guiElement:guiElements) {
+			guiElement.render(g, observer);
+		}
+	}
+	
+	public void mousePressed(MouseEvent e, List<GuiElement> guiElements) {
+		
+		float x = (float) (e.getX() - GameWindow.getFramePosition().getX());
+		float y = (float) (e.getY() - GameWindow.getFramePosition().getY());
+		
+		for(GuiElement guiElement:guiElements) {
+			
+			if(guiElement.mouseOver(x, y)) {
+				System.out.println("IN");
+			}
+		}
+	}
+
+}
