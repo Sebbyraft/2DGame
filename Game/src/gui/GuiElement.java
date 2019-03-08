@@ -27,7 +27,7 @@ public class GuiElement {
 	
 	public boolean mouseOver(float mouseX, float mouseY) {
 		if(mouseX > position.getX() && mouseX < position.getX() + size.getX()) {
-			if(mouseY > position.getY() && mouseX < position.getY() + size.getY()) {
+			if(mouseY > position.getY() && mouseY < position.getY() + size.getY()) {
 				return true;
 			} else return false;
 		}else return false;

@@ -2,14 +2,12 @@ package gui;
 
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 import java.util.List;
 
-import display.GameWindow;
 
-
-public class GuiManager implements MouseMotionListener{
+public class GuiManager implements MouseListener{
 	
 	private List<GuiElement> guiElements;
 	
@@ -24,22 +22,38 @@ public class GuiManager implements MouseMotionListener{
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
+		for(GuiElement guiElement:guiElements) {
+			if(guiElement.mouseOver(e.getX(), e.getY())) {
+				if(e.getButton() == MouseEvent.BUTTON1) {
+					String id = guiElement.getId();
+					System.out.println(id);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		float x = e.getX();
-		float y = e.getY();
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
-		System.out.println("x: " + x +" y: "+ y);		
-		for(GuiElement guiElement:guiElements) {
-			if(guiElement.mouseOver(x, y)) {
-				System.out.println("IN");
-			}
-		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

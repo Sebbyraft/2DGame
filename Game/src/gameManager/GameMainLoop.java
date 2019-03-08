@@ -4,8 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		guis.add(new GuiElement("speed",new Vec2(160, 5), new Vec2(32, 32), "speed"));
 		
 		guiManager = new GuiManager(guis);
-		this.addMouseMotionListener(guiManager);;
+		this.addMouseListener(guiManager);;
 		
 		new GameWindow(this);
 		
