@@ -7,12 +7,12 @@ import java.awt.image.ImageObserver;
 import loader.Loader;
 import structures.Vec2;
 
-public class GuiElement {
+public abstract class GuiElement {
 	
-	private String id;
-	private Vec2 position;
-	private Vec2 size;
-	private BufferedImage image;
+	protected String id;
+	protected Vec2 position;
+	protected Vec2 size;
+	protected BufferedImage image;
 	
 	public GuiElement(String id,Vec2 position, Vec2 size, String imageName) {
 		this.id = id;
@@ -21,9 +21,8 @@ public class GuiElement {
 		this.image = Loader.loadImage("res/gui/"+imageName+".png");
 	}
 	
-	public void render(Graphics g, ImageObserver observer) {
-		g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
-	}
+	public abstract void update();
+	public abstract void render(Graphics g, ImageObserver observer);
 	
 	public boolean mouseOver(float mouseX, float mouseY) {
 		if(mouseX > position.getX() && mouseX < position.getX() + size.getX()) {
@@ -33,14 +32,6 @@ public class GuiElement {
 		}else return false;
 	}
 	
-	public void startAnimation() {
-		this.size = new Vec2((float)(size.getX()*1.3), (float) (size.getY()*1.3));
-	}
-	
-	public void stopAnimation() {
-		this.size = new Vec2((float)(size.getX()/1.3), (float) (size.getY()/1.3));
-	}
-
 	public Vec2 getPosition() {
 		return position;
 	}
@@ -63,6 +54,11 @@ public class GuiElement {
 
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+	
+	public void changeIDAndImage(String imageName, String id) {
+		this.id = id;
+		this.image = Loader.loadImage("res/gui/"+imageName+".png");
 	}
 
 	public String getId() {

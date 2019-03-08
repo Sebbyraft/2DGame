@@ -1,0 +1,14 @@
+package gui;
+
+import structures.Vec2;
+
+public class PlayButton extends GuiElement{
+	
+	private String id;
+
+	public PlayButton(Vec2 position, Vec2 size) {
+		id = "pause";
+		super(id, position, size, imageName);
+	}
+
+}

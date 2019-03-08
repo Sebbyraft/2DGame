@@ -1,0 +1,25 @@
+package gui;
+
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
+
+import structures.Vec2;
+
+public class PlayButton extends GuiElement{
+	
+	private static String[] images = {"pause","play"};
+	
+	
+	public void render(Graphics g, ImageObserver observer) {
+		g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
+	}
+
+	public boolean mouseOver(float mouseX, float mouseY) {
+		if(mouseX > position.getX() && mouseX < position.getX() + size.getX()) {
+			if(mouseY > position.getY() && mouseY < position.getY() + size.getY()) {
+				return true;
+			} else return false;
+		}else return false;
+	}
+
+}

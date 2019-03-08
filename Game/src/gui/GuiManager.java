@@ -24,12 +24,14 @@ public class GuiManager implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		for(GuiElement guiElement:guiElements) {
-			if(guiElement.mouseOver(e.getX(), e.getY())) {
-				if(e.getButton() == MouseEvent.BUTTON1) {
-					String id = guiElement.getId();
-					System.out.println(id);
+			
+				if(guiElement.mouseOver(e.getX(), e.getY())) {
+					if(e.getButton() == MouseEvent.BUTTON1) {
+					guiElement.update();
+					System.out.println(guiElement.id);
 				}
 			}
+			
 		}
 	}
 

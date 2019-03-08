@@ -1,0 +1,17 @@
+package gui;
+
+import structures.Vec2;
+
+public class PlayButton implements GuiElement{
+	
+	private static String[] images = {"pause","play"};
+
+	public boolean mouseOver(float mouseX, float mouseY) {
+		if(mouseX > position.getX() && mouseX < position.getX() + size.getX()) {
+			if(mouseY > position.getY() && mouseY < position.getY() + size.getY()) {
+				return true;
+			} else return false;
+		}else return false;
+	}
+
+}

@@ -12,6 +12,7 @@ import java.util.List;
 import display.GameWindow;
 import gui.GuiElement;
 import gui.GuiManager;
+import gui.PlayButton;
 import structures.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -32,9 +33,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		
 		guis = new ArrayList<GuiElement>();
-		guis.add(new GuiElement("menu",new Vec2(5, 5), new Vec2(96, 32), "menu"));
-		guis.add(new GuiElement("play",new Vec2(120, 5), new Vec2(32, 32), "play"));
-		guis.add(new GuiElement("speed",new Vec2(160, 5), new Vec2(32, 32), "speed"));
+		guis.add(new PlayButton(new Vec2(120, 5), new Vec2(32, 32)));
 		
 		guiManager = new GuiManager(guis);
 		this.addMouseListener(guiManager);;
