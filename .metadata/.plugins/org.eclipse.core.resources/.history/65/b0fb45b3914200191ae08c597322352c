@@ -33,7 +33,7 @@ public class MenuButton extends GuiElement{
 	public void render(Graphics g, ImageObserver observer) {
 		g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
 		if (menuOpened) {
-			g.setColor(new Color((int)GuiManager.GUI_COLOR.getX(),(int)GuiManager.GUI_COLOR.getY(),(int)GuiManager.GUI_COLOR.getZ()));
+			g.setColor(new Color(0, 150, 50));
 			g.fillRect(0, 10+(int) GuiManager.TOP_GUI_SIZE.getY(), GameWindow.WIDTH/2, GameWindow.HEIGHT);
 		}
 	}
