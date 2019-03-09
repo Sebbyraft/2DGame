@@ -7,10 +7,12 @@ import structures.Vec2;
 
 public class PlayButton extends GuiElement{
 	
+	private static final Vec2 SIZE = new Vec2(32, 32);
+
 	private boolean selected;
 	
-	public PlayButton(Vec2 position, Vec2 size) {
-		super("pause", position, size, "pause");
+	public PlayButton(Vec2 position) {
+		super("pause", position, SIZE, "pause");
 		selected = false;
 	}
 	

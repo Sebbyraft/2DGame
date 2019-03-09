@@ -1,0 +1,20 @@
+package gui;
+
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
+
+public class MenuButton extends GuiElement{
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render(Graphics g, ImageObserver observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
