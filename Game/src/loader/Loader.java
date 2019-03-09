@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import structures.Vec2;
+
 public class Loader {
 
 	
@@ -20,5 +22,9 @@ public class Loader {
 		}
 		
 		return image;
+	}
+	
+	public static BufferedImage getTile(BufferedImage image, Vec2 position, Vec2 size) {
+		return image.getSubimage((int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY());
 	}
 }

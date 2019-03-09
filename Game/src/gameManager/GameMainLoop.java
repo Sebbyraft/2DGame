@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import display.GameWindow;
+import entities.Planet;
+import entities.PlanetsManager;
 import gui.GuiElement;
 import gui.GuiManager;
 import gui.MenuButton;
@@ -26,6 +28,9 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public List<GuiElement> guis;	
 	public GuiManager guiManager;
 	
+	public List<Planet> planets;	
+	public PlanetsManager planetsManager;
+	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
 	}
@@ -37,8 +42,14 @@ public class GameMainLoop extends Canvas implements Runnable{
 		guis.add(new PlayButton(new Vec2(120, 5)));
 		guis.add(new MenuButton(new Vec2(10, 5)));
 		
+		planets = new ArrayList<Planet>();
+		planets.add(new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_4"));
+		
+		
 		guiManager = new GuiManager(guis);
-		this.addMouseListener(guiManager);;
+		this.addMouseListener(guiManager);
+		
+		planetsManager = new PlanetsManager(planets);
 		
 		new GameWindow(this);
 		
@@ -59,12 +70,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 		
 		//*******************************************************
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(new Color(22, 22, 22));
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
-		
-		
 		//*******************************************************
 		
+		planetsManager.render(g2d, this);
 		guiManager.render(g2d, this);
 		//*******************************************************
 

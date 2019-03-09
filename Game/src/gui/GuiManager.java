@@ -9,14 +9,14 @@ import java.util.List;
 
 import display.GameWindow;
 import structures.Vec2;
-import structures.Vec3;
+import structures.Vec4;
 
 
 public class GuiManager implements MouseListener{
 	
 	public static final Vec2 TOP_GUI_POSITION = new Vec2(0, 0);
 	public static final Vec2 TOP_GUI_SIZE = new Vec2(GameWindow.WIDTH, 40);
-	public static final Vec3 GUI_COLOR = new Vec3(25, 25, 112);
+	public static final Vec4 GUI_COLOR = new Vec4(25, 25, 112, 100);
 	
 	private List<GuiElement> guiElements;
 	
@@ -26,7 +26,7 @@ public class GuiManager implements MouseListener{
 	}
 	
 	public void render(Graphics g, ImageObserver observer) {
-		g.setColor(new Color((int)GUI_COLOR.getX(),(int)GUI_COLOR.getY(),(int)GUI_COLOR.getZ()));
+		g.setColor(new Color((int)GUI_COLOR.getX(),(int)GUI_COLOR.getY(),(int)GUI_COLOR.getZ(),(int)GUI_COLOR.getW()));
 		g.fillRect((int)TOP_GUI_POSITION.getX(),(int)TOP_GUI_POSITION.getY(),(int)TOP_GUI_SIZE.getX(),(int)TOP_GUI_SIZE.getY());
 		for(GuiElement guiElement:guiElements) {
 			guiElement.render(g, observer);
