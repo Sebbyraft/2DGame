@@ -58,6 +58,25 @@ public class GuiManager implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	public void addGuiElement(GuiElement guiElement) {
+		this.guiElements.add(guiElement);
+	}
+	
+	public GuiElement searchGuiElementByID(String id) {
+		GuiElement guiElement = null;
+		for(GuiElement guiEle:guiElements) {
+			if(guiEle.getId().equalsIgnoreCase(id)) {
+				guiElement = guiEle;
+			}
+		}
+		return guiElement;
+	}
+	
+	public void removeGuiElement(GuiElement guiElement) {
+		this.guiElements.remove(guiElement);
+	}
 
 
 
