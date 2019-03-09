@@ -30,11 +30,17 @@ public class Planet extends Entity {
 	public void render(Graphics g, ImageObserver observer) {
 		if(isLocked) {
 			g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
-			g.drawImage(lock, (int)(position.getX()+size.getX()/2-64), (int)(size.getY()+64), 64, 64, observer);	
+			g.drawImage(lock, (int)(position.getX()+size.getX()/2-32), (int)(size.getY()+40), 64, 64, observer);	
 		} else {
 			g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);	
 		}
-		
 	}
 
+	public boolean isLocked() {
+		return isLocked;
+	}
+
+	public void setLocked(boolean isLocked) {
+		this.isLocked = isLocked;
+	}
 }

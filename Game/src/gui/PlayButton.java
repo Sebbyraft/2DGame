@@ -12,7 +12,7 @@ public class PlayButton extends GuiElement{
 	private boolean selected;
 	
 	public PlayButton(Vec2 position) {
-		super("pause", position, SIZE, "pause");
+		super("pause_button", position, SIZE, "pause");
 		selected = false;
 	}
 	
@@ -23,11 +23,11 @@ public class PlayButton extends GuiElement{
 	@Override
 	public void update() {	
 		if(selected == false) {
-			changeIDAndImage("play", "play");
+			changeIDAndImage("play", "play_button");
 			selected = true;
 			return;
 		} else {
-			changeIDAndImage("pause", "pause");
+			changeIDAndImage("pause","pause_button");
 			selected = false;
 			return;
 		}

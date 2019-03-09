@@ -43,13 +43,21 @@ public class GameMainLoop extends Canvas implements Runnable{
 		guis.add(new MenuButton(new Vec2(10, 5)));
 		
 		planets = new ArrayList<Planet>();
-		planets.add(new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_4"));
+		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
+		startPlanet.setLocked(false);
+		planets.add(startPlanet);
+		planets.add(new Planet("p2", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_2"));
+		planets.add(new Planet("p3", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_3"));
+		planets.add(new Planet("p4", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_4"));
+		
 		
 		
 		guiManager = new GuiManager(guis);
 		this.addMouseListener(guiManager);
 		
 		planetsManager = new PlanetsManager(planets);
+		this.addMouseListener(planetsManager);
+		this.addMouseWheelListener(planetsManager);
 		
 		new GameWindow(this);
 		
