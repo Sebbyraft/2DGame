@@ -73,11 +73,9 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g.setColor(new Color(22, 22, 22));
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		//*******************************************************
-		
+		guiManager.render(g2d, this);
 		planetsManager.render(g2d, this);
 		
-		
-		guiManager.render(g2d, this);
 		//*******************************************************
 
 		g.dispose();

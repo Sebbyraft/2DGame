@@ -27,7 +27,7 @@ public class GuiManager implements MouseListener{
 	
 	public void render(Graphics g, ImageObserver observer) {
 		g.setColor(new Color((int)GUI_COLOR.getX(),(int)GUI_COLOR.getY(),
-				(int)GUI_COLOR.getZ(),(int)GUI_COLOR.getW()));
+				(int)GUI_COLOR.getZ(),(int)100));
 		g.fillRect((int)TOP_GUI_POSITION.getX(),(int)TOP_GUI_POSITION.getY(),(int)TOP_GUI_SIZE.getX(),(int)TOP_GUI_SIZE.getY());
 		for(GuiElement guiElement:guiElements) {
 			guiElement.render(g, observer);
