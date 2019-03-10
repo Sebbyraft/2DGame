@@ -9,10 +9,8 @@ import javax.imageio.ImageIO;
 import toolkit.Vec2;
 
 public class Loader {
-
 	
 	public static BufferedImage loadImage(String path) {
-
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File(path));

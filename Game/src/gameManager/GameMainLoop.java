@@ -8,6 +8,8 @@ import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import Timer.Clock;
 import display.GameWindow;
 import entities.Planet;
 import entities.PlanetsManager;
@@ -24,7 +26,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 
 	private boolean running = true;
 	private Thread thread;
-	public int deltaMultiplier = 2;
+	public int deltaMultiplier = 1;
 	public float systemTime = 0;
 	
 	public List<GuiElement> guis;	
@@ -34,6 +36,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public PlanetsManager planetsManager;
 	
 	public MapButton mapButton;
+	
+	public Clock clock;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -64,6 +68,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 		this.addMouseListener(planetsManager);
 		this.addMouseWheelListener(planetsManager);
 		
+		clock = new Clock(0, 0);
+		
 		new GameWindow(this);
 		
 	}
@@ -85,6 +91,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		//*************************************************************************************************
 		
+		System.out.println(getSystemTime());
 		
 		if(mapButton.getSelected()) {
 			planetsManager.render(g2d, this);
@@ -92,7 +99,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		guiManager.render(g2d, this);
 		
-	
+		clock.update(getSystemTime());
 		//*************************************************************************************************
 
 		g.dispose();
