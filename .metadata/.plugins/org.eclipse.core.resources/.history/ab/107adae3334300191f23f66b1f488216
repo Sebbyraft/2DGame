@@ -1,0 +1,147 @@
+package gameManager;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import display.GameWindow;
+import entities.Planet;
+import entities.PlanetsManager;
+import gui.GuiElement;
+import gui.GuiManager;
+import gui.MapButton;
+import gui.MenuButton;
+import gui.PlayButton;
+import toolkit.Vec2;
+
+public class GameMainLoop extends Canvas implements Runnable{
+
+	private static final long serialVersionUID = -2786430757538994538L;
+
+	private boolean running = true;
+	private Thread thread;
+	
+	public List<GuiElement> guis;	
+	public GuiManager guiManager;
+	
+	public List<Planet> planets;	
+	public PlanetsManager planetsManager;
+	
+	public MapButton mapButton;
+	
+	public static void main(String[] args) throws IOException{
+		new GameMainLoop();
+	}
+	
+	public GameMainLoop() {
+		
+		guis = new ArrayList<GuiElement>();
+		guis.add(new PlayButton(new Vec2(120, 5)));
+		guis.add(new MenuButton(new Vec2(10, 5)));
+		mapButton = new MapButton(new Vec2(20,  GameWindow.HEIGHT-120));
+		guis.add(mapButton);
+	
+		
+		planets = new ArrayList<Planet>();
+		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
+		startPlanet.setLocked(false);
+		planets.add(startPlanet);
+		planets.add(new Planet("p2", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_2"));
+		planets.add(new Planet("p3", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_3"));
+		planets.add(new Planet("p4", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_4"));
+		
+		guiManager = new GuiManager(guis);
+		this.addMouseListener(guiManager);
+		
+		planetsManager = new PlanetsManager(planets);
+		this.addMouseListener(planetsManager);
+		this.addMouseWheelListener(planetsManager);
+		
+		new GameWindow(this);
+		
+	}
+
+	private void render() {
+
+		BufferStrategy bs = this.getBufferStrategy();
+		
+		if(bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = bs.getDrawGraphics();
+		Graphics2D g2d = (Graphics2D)g;
+		
+		//*************************************************************************************************
+		g.setColor(new Color(22, 22, 22));
+		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
+		//*************************************************************************************************
+		
+		guiManager.render(g2d, this);
+		
+		
+		if(mapButton.getSelected()) {
+			planetsManager.render(g2d, this);
+			
+		}
+		
+	
+		//*************************************************************************************************
+
+		g.dispose();
+		bs.show();
+	}
+	
+	@SuppressWarnings("unused")
+	public void run() {
+		this.requestFocus();
+		long lastTime = System.nanoTime();
+		double amountOfTicks = 60.0;
+		double ns = 1000000000/amountOfTicks;
+		double delta = 0;
+		long timer = System.currentTimeMillis();
+		int frames = 0;
+		
+		while(running) {
+			long now = System.nanoTime();
+			delta += (now-lastTime)/ns;
+			lastTime = now;
+			
+			if (running) {
+				render();
+			}
+			
+			frames++;
+			
+			if(System.currentTimeMillis()-timer>1000) {
+				timer += 1000;
+				frames = 0;
+			}
+		}
+		stop();
+	}
+	
+	public synchronized void start() {
+		thread = new Thread(this);
+		thread.start();
+		running = true;
+	}
+	
+	public synchronized void stop() {
+		try {
+			thread.join();
+			running = false;
+		} catch(Exception e) {
+			System.err.println("Could not join thread!!");
+			e.printStackTrace();
+		}
+	}
+
+}

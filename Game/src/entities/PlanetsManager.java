@@ -26,10 +26,12 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 	public void render(Graphics2D g, ImageObserver observer) {
 		Planet p = planets.get(selectedPlanet);
 		p.render(g, observer);
-		g.setColor(new Color((int)GuiManager.GUI_COLOR.getX(),(int)GuiManager.GUI_COLOR.getY(),
-				(int)GuiManager.GUI_COLOR.getZ(),(int)GuiManager.GUI_COLOR.getW()));
+		g.setColor(GuiManager.GUI_COLOR_1);
 		g.setStroke(new BasicStroke(5));
 		g.drawRoundRect((int)p.getX()-5, (int)p.getY()-5, (int)p.getWidth()+10, (int)p.getHeight()+10, 50, 50);
+		g.setColor(new Color(255, 255, 255, 255));
+		//g.setFont(new Font ("TimesRoman", Font.PLAIN, 40));
+		//g.drawString("MAP", (int)GuiManager.TOP_GUI_SIZE.getX()/2, 100);
 		
 	}
 
@@ -39,6 +41,8 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 			if(planet.mouseOver(e.getX(), e.getY())) {
 				if(e.getButton() == MouseEvent.BUTTON1) {
 					planet.update();
+					System.out.println(getSelectedPlanetID());
+					return;
 				}
 			}	
 		}
@@ -46,10 +50,9 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-			int wheelRot = e.getWheelRotation();
-			selectedPlanet += wheelRot;
-			selectedPlanet = Math.max(0, Math.min(planets.size()-1, selectedPlanet));
-		
+		int wheelRot = e.getWheelRotation();
+		selectedPlanet += wheelRot;
+		selectedPlanet = Math.max(0, Math.min(planets.size()-1, selectedPlanet));
 	}
 
 	@Override
@@ -99,7 +102,7 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 		this.planets.clear();
 	}
 
-	public String getSelectedPlanet() {
+	public String getSelectedPlanetID() {
 		return planets.get(selectedPlanet).getId();
 	}
 

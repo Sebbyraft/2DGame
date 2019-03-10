@@ -4,31 +4,34 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.ImageObserver;
 import java.util.List;
 
 import display.GameWindow;
 import toolkit.Vec2;
-import toolkit.Vec4;
 
 
-public class GuiManager implements MouseListener{
+public class GuiManager implements MouseListener, MouseMotionListener{
 	
 	public static final Vec2 TOP_GUI_POSITION = new Vec2(0, 0);
 	public static final Vec2 TOP_GUI_SIZE = new Vec2(GameWindow.WIDTH, 40);
-	public static final Vec4 GUI_COLOR = new Vec4(25, 25, 112, 100);
+	public static final Color GUI_COLOR_1 = new Color(25, 25, 112, 200);
+	public static final Color GUI_COLOR_2 = new Color(255, 255, 255, 255);
 	
 	private List<GuiElement> guiElements;
+	
+	private Color guiColor;
 	
 	
 	public GuiManager(List<GuiElement> guiElements) {
 		this.guiElements = guiElements;
+		guiColor = GUI_COLOR_1;
 	}
 	
 	public void render(Graphics2D g, ImageObserver observer) {
-		g.setColor(new Color((int)GUI_COLOR.getX(),(int)GUI_COLOR.getY(),
-				(int)GUI_COLOR.getZ(),(int)GUI_COLOR.getW()));
-		g.fillRect((int)TOP_GUI_POSITION.getX(),(int)TOP_GUI_POSITION.getY(),(int)TOP_GUI_SIZE.getX(),(int)TOP_GUI_SIZE.getY());
+		//g.setColor(guiColor);
+		//g.fillRect((int)TOP_GUI_POSITION.getX(),(int)TOP_GUI_POSITION.getY(),(int)TOP_GUI_SIZE.getX(),(int)TOP_GUI_SIZE.getY());
 		for(GuiElement guiElement:guiElements) {
 			guiElement.render(g, observer);
 		}
@@ -37,17 +40,55 @@ public class GuiManager implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		for(GuiElement guiElement:guiElements) {
-			
-				if(guiElement.mouseOver(e.getX(), e.getY())) {
-					if(e.getButton() == MouseEvent.BUTTON1) {
+			if(guiElement.mouseOver(e.getX(), e.getY())) {
+				if(e.getButton() == MouseEvent.BUTTON1) {
 					guiElement.update();
 					System.out.println(guiElement.id);
-				}
+				} 
 			}
-			
 		}
 	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		for(GuiElement guiElement:guiElements) {
+			if(guiElement.mouseOver(e.getX(), e.getY())) {
+				guiElement.changeColor(GUI_COLOR_2);
+			} else {
+				guiElement.changeColor(GUI_COLOR_1);
+			}
+		}
+		
+	}
 
+	public void addGuiElement(GuiElement guiElement) {
+		this.guiElements.add(guiElement);
+	}
+	
+	public GuiElement searchGuiElementByID(String id) {
+		GuiElement guiElement = null;
+		for(GuiElement guiEle:guiElements) {
+			if(guiEle.getId().equalsIgnoreCase(id)) {
+				guiElement = guiEle;
+			}
+		}
+		return guiElement;
+	}
+	
+	public void removeGuiElement(GuiElement guiElement) {
+		this.guiElements.remove(guiElement);
+	}
+
+	public void removeAllElements() {
+		this.guiElements.clear();
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -71,29 +112,4 @@ public class GuiManager implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	public void addGuiElement(GuiElement guiElement) {
-		this.guiElements.add(guiElement);
-	}
-	
-	public GuiElement searchGuiElementByID(String id) {
-		GuiElement guiElement = null;
-		for(GuiElement guiEle:guiElements) {
-			if(guiEle.getId().equalsIgnoreCase(id)) {
-				guiElement = guiEle;
-			}
-		}
-		return guiElement;
-	}
-	
-	public void removeGuiElement(GuiElement guiElement) {
-		this.guiElements.remove(guiElement);
-	}
-
-	public void removeAllElements() {
-		this.guiElements.clear();
-	}
-
-
 }

@@ -41,12 +41,12 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	public GameMainLoop() {
 		
-		
 		guis = new ArrayList<GuiElement>();
 		guis.add(new PlayButton(new Vec2(120, 5)));
 		guis.add(new MenuButton(new Vec2(10, 5)));
 		mapButton = new MapButton(new Vec2(20,  GameWindow.HEIGHT-120));
 		guis.add(mapButton);
+	
 		
 		planets = new ArrayList<Planet>();
 		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
@@ -56,10 +56,9 @@ public class GameMainLoop extends Canvas implements Runnable{
 		planets.add(new Planet("p3", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_3"));
 		planets.add(new Planet("p4", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_4"));
 		
-		
-		
 		guiManager = new GuiManager(guis);
 		this.addMouseListener(guiManager);
+		this.addMouseMotionListener(guiManager);
 		
 		planetsManager = new PlanetsManager(planets);
 		this.addMouseListener(planetsManager);
@@ -81,21 +80,23 @@ public class GameMainLoop extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D)g;
 		
-	
-		
-		//*******************************************************
+		//*************************************************************************************************
 		g.setColor(new Color(22, 22, 22));
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
-		//*******************************************************
+		//*************************************************************************************************
 		
-		guiManager.render(g2d, this);
+		
+		
 		
 		if(mapButton.getSelected()) {
 			planetsManager.render(g2d, this);
+			
 		}
 		
+		guiManager.render(g2d, this);
+		
 	
-		//*******************************************************
+		//*************************************************************************************************
 
 		g.dispose();
 		bs.show();
@@ -118,6 +119,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 			
 			if (running) {
 				render();
+			} else {
+				cleanUp();
 			}
 			
 			frames++;
@@ -144,6 +147,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 			System.err.println("Could not join thread!!");
 			e.printStackTrace();
 		}
+	}
+	
+	public void cleanUp() {
+		guiManager.removeAllElements();
+		planetsManager.removeAllElements();
 	}
 
 }

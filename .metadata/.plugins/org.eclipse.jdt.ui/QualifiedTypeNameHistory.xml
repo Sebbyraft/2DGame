@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="java.awt.image.BufferStrategy"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.awt.Window"/>
 <fullyQualifiedTypeName name="gameObject.GameObject"/>
@@ -41,7 +40,6 @@
 <fullyQualifiedTypeName name="java.awt.event.MouseMotionListener"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseWheelListener"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="gui.GuiManager"/>
 <fullyQualifiedTypeName name="entities.Planet"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="java.awt.Stroke"/>
@@ -51,4 +49,6 @@
 <fullyQualifiedTypeName name="display.GameWindow"/>
 <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
 <fullyQualifiedTypeName name="gui.MapButton"/>
+<fullyQualifiedTypeName name="gui.GuiManager"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>

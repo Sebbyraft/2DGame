@@ -11,15 +11,16 @@ public class MapButton extends GuiElement{
 	private static final Vec2 SIZE = new Vec2(72, 72);
 
 	private boolean selected;
+	private Color color;
 	
 	public MapButton(Vec2 position) {
 		super("map_button", position, SIZE, "map");
 		selected = false;
+		color = GuiManager.GUI_COLOR_1;
 	}
 	
 	public void render(Graphics2D g, ImageObserver observer) {
-		g.setColor(new Color((int)GuiManager.GUI_COLOR.getX(),(int)GuiManager.GUI_COLOR.getY(),
-				(int)GuiManager.GUI_COLOR.getZ(),(int)GuiManager.GUI_COLOR.getW()));
+		g.setColor(color);
 		g.setStroke(new BasicStroke(5));
 		g.drawRoundRect((int)position.getX()-3, (int)position.getY()-3, (int)SIZE.getX()+6, (int)SIZE.getY()+6, 30, 30);
 		g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
@@ -34,6 +35,10 @@ public class MapButton extends GuiElement{
 			selected = false;
 			return;
 		}
+	}
+	
+	public void changeColor(Color newColor) {
+		color = newColor;
 	}
 	
 	public boolean getSelected() {
