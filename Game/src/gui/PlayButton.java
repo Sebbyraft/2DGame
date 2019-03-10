@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 
 import structures.Vec2;
@@ -16,7 +16,7 @@ public class PlayButton extends GuiElement{
 		selected = false;
 	}
 	
-	public void render(Graphics g, ImageObserver observer) {
+	public void render(Graphics2D g, ImageObserver observer) {
 		g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
 	}
 

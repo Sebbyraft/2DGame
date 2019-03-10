@@ -3,8 +3,6 @@ package entities;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
@@ -26,10 +24,8 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 	}
 	
 	public void render(Graphics2D g, ImageObserver observer) {
-		
 		Planet p = planets.get(selectedPlanet);
 		p.render(g, observer);
-		
 		g.setColor(new Color((int)GuiManager.GUI_COLOR.getX(),(int)GuiManager.GUI_COLOR.getY(),
 				(int)GuiManager.GUI_COLOR.getZ(),(int)GuiManager.GUI_COLOR.getW()));
 		g.setStroke(new BasicStroke(5));
@@ -43,7 +39,6 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 			if(planet.mouseOver(e.getX(), e.getY())) {
 				if(e.getButton() == MouseEvent.BUTTON1) {
 					planet.update();
-					System.out.println(planet.id);
 				}
 			}	
 		}
@@ -104,7 +99,9 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 		this.planets.clear();
 	}
 
-
+	public String getSelectedPlanet() {
+		return planets.get(selectedPlanet).getId();
+	}
 
 
 }

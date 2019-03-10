@@ -1,7 +1,7 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 
 import display.GameWindow;
@@ -30,7 +30,7 @@ public class MenuButton extends GuiElement{
 	}
 
 	@Override
-	public void render(Graphics g, ImageObserver observer) {
+	public void render(Graphics2D g, ImageObserver observer) {
 		g.drawImage(image, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
 		if (menuOpened) {
 			g.setColor(new Color((int)GuiManager.GUI_COLOR.getX(),(int)GuiManager.GUI_COLOR.getY(),

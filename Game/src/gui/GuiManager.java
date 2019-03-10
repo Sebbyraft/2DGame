@@ -1,7 +1,7 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
@@ -25,7 +25,7 @@ public class GuiManager implements MouseListener{
 		this.guiElements = guiElements;
 	}
 	
-	public void render(Graphics g, ImageObserver observer) {
+	public void render(Graphics2D g, ImageObserver observer) {
 		g.setColor(new Color((int)GUI_COLOR.getX(),(int)GUI_COLOR.getY(),
 				(int)GUI_COLOR.getZ(),(int)GUI_COLOR.getW()));
 		g.fillRect((int)TOP_GUI_POSITION.getX(),(int)TOP_GUI_POSITION.getY(),(int)TOP_GUI_SIZE.getX(),(int)TOP_GUI_SIZE.getY());

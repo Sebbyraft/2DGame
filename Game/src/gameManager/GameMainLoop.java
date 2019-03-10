@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import entities.Planet;
 import entities.PlanetsManager;
 import gui.GuiElement;
 import gui.GuiManager;
+import gui.MapButton;
 import gui.MenuButton;
 import gui.PlayButton;
 import structures.Vec2;
@@ -31,6 +33,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public List<Planet> planets;	
 	public PlanetsManager planetsManager;
 	
+	public MapButton mapButton;
+	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
 	}
@@ -41,6 +45,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 		guis = new ArrayList<GuiElement>();
 		guis.add(new PlayButton(new Vec2(120, 5)));
 		guis.add(new MenuButton(new Vec2(10, 5)));
+		mapButton = new MapButton(new Vec2(20,  GameWindow.HEIGHT-120));
+		guis.add(mapButton);
 		
 		planets = new ArrayList<Planet>();
 		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
@@ -82,10 +88,13 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		//*******************************************************
 		
-		planetsManager.render(g2d, this);
-		
-		
 		guiManager.render(g2d, this);
+		
+		if(mapButton.getSelected()) {
+			planetsManager.render(g2d, this);
+		}
+		
+	
 		//*******************************************************
 
 		g.dispose();

@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
@@ -22,7 +22,7 @@ public abstract class GuiElement {
 	}
 	
 	public abstract void update();
-	public abstract void render(Graphics g, ImageObserver observer);
+	public abstract void render(Graphics2D g, ImageObserver observer);
 	
 	public boolean mouseOver(float mouseX, float mouseY) {
 		if(mouseX > position.getX() && mouseX < position.getX() + size.getX()) {
