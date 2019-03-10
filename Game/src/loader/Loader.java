@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import structures.Vec2;
+import toolkit.Vec2;
 
 public class Loader {
 

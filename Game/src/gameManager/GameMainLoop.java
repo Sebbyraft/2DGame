@@ -18,7 +18,7 @@ import gui.GuiManager;
 import gui.MapButton;
 import gui.MenuButton;
 import gui.PlayButton;
-import structures.Vec2;
+import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
 

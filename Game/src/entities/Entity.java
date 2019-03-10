@@ -2,7 +2,8 @@ package entities;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
-import structures.Vec2;
+
+import toolkit.Vec2;
 
 public abstract class Entity {
 	protected Vec2 position;

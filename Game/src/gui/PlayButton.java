@@ -3,7 +3,7 @@ package gui;
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 
-import structures.Vec2;
+import toolkit.Vec2;
 
 public class PlayButton extends GuiElement{
 	

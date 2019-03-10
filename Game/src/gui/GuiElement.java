@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import loader.Loader;
-import structures.Vec2;
+import toolkit.Vec2;
 
 public abstract class GuiElement {
 	

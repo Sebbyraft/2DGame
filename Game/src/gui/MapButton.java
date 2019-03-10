@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 
-import structures.Vec2;
+import toolkit.Vec2;
 
 public class MapButton extends GuiElement{
 	private static final Vec2 SIZE = new Vec2(72, 72);

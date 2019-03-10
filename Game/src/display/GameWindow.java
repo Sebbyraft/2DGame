@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import gameManager.GameMainLoop;
-import structures.Vec2;
+import toolkit.Vec2;
 
 public class GameWindow extends Canvas{
 

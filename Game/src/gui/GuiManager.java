@@ -8,8 +8,8 @@ import java.awt.image.ImageObserver;
 import java.util.List;
 
 import display.GameWindow;
-import structures.Vec2;
-import structures.Vec4;
+import toolkit.Vec2;
+import toolkit.Vec4;
 
 
 public class GuiManager implements MouseListener{

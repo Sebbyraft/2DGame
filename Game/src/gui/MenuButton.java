@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 
 import display.GameWindow;
-import structures.Vec2;
+import toolkit.Vec2;
 
 public class MenuButton extends GuiElement{
 	
