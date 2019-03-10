@@ -29,7 +29,6 @@ public class MenuButton extends GuiElement{
 		} else {
 			menuOpened = false;
 		}
-		
 	}
 
 	@Override

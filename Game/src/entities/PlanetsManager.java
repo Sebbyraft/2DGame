@@ -30,9 +30,6 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 		g.setStroke(new BasicStroke(5));
 		g.drawRoundRect((int)p.getX()-5, (int)p.getY()-5, (int)p.getWidth()+10, (int)p.getHeight()+10, 50, 50);
 		g.setColor(new Color(255, 255, 255, 255));
-		//g.setFont(new Font ("TimesRoman", Font.PLAIN, 40));
-		//g.drawString("MAP", (int)GuiManager.TOP_GUI_SIZE.getX()/2, 100);
-		
 	}
 
 	@Override
@@ -57,28 +54,19 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
-	
 	
 	public void addPlanet(Planet planet) {
 		this.planets.add(planet);
@@ -105,6 +93,4 @@ public class PlanetsManager implements MouseListener, MouseWheelListener{
 	public String getSelectedPlanetID() {
 		return planets.get(selectedPlanet).getId();
 	}
-
-
 }

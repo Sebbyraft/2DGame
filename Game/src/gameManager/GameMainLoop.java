@@ -8,7 +8,6 @@ import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import display.GameWindow;
 import entities.Planet;
 import entities.PlanetsManager;
@@ -89,7 +88,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		if(mapButton.getSelected()) {
 			planetsManager.render(g2d, this);
-			
 		}
 		
 		guiManager.render(g2d, this);
@@ -159,7 +157,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	}
 	
 	public void setDeltaMultiplier(int multiplier) {
-		this.deltaMultiplier = deltaMultiplier;
+		this.deltaMultiplier = multiplier;
 	}
 
 }
