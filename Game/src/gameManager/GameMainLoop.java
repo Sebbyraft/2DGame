@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 
 	private boolean running = true;
 	private Thread thread;
+	public int deltaMultiplier = 2;
+	public float systemTime = 0;
 	
 	public List<GuiElement> guis;	
 	public GuiManager guiManager;
@@ -86,8 +87,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 		//*************************************************************************************************
 		
 		
-		
-		
 		if(mapButton.getSelected()) {
 			planetsManager.render(g2d, this);
 			
@@ -101,7 +100,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g.dispose();
 		bs.show();
 	}
-	
+
 	@SuppressWarnings("unused")
 	public void run() {
 		this.requestFocus();
@@ -114,11 +113,12 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		while(running) {
 			long now = System.nanoTime();
-			delta += (now-lastTime)/ns;
+			delta = delta + (now-lastTime)/ns;
 			lastTime = now;
 			
 			if (running) {
 				render();
+				systemTime=(float)delta*deltaMultiplier;
 			} else {
 				cleanUp();
 			}
@@ -152,6 +152,14 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public void cleanUp() {
 		guiManager.removeAllElements();
 		planetsManager.removeAllElements();
+	}
+	
+	public float getSystemTime() {
+		return systemTime;
+	}
+	
+	public void setDeltaMultiplier(int multiplier) {
+		this.deltaMultiplier = deltaMultiplier;
 	}
 
 }

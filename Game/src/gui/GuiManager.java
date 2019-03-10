@@ -21,12 +21,8 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	
 	private List<GuiElement> guiElements;
 	
-	private Color guiColor;
-	
-	
 	public GuiManager(List<GuiElement> guiElements) {
 		this.guiElements = guiElements;
-		guiColor = GUI_COLOR_1;
 	}
 	
 	public void render(Graphics2D g, ImageObserver observer) {
