@@ -1,0 +1,40 @@
+package gui;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.ImageObserver;
+
+import toolkit.Vec2;
+
+public class ToolSpace extends GuiElement{
+	
+	private static final String ID = "tool_space";
+	private Color color;
+	private static final Vec2 SIZE = new Vec2(32*3, 32);
+
+	public ToolSpace(String id, Vec2 position, Vec2 size, String imageName) {
+		super(id, position, size, imageName);
+		color = GuiManager.GUI_COLOR_1;
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render(Graphics2D g, ImageObserver observer) {
+		g.setColor(color);
+		g.setStroke(new BasicStroke(5));
+		g.drawRect((int)position.getX()-4,(int)position.getY()-4, (int)SIZE.getX()+8, (int)SIZE.getY()+8);
+
+	}
+
+	@Override
+	public void changeColor(Color color) {
+		this.color = color;
+	}
+
+}

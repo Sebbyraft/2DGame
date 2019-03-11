@@ -19,10 +19,15 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	public static final Color GUI_COLOR_1 = new Color(25, 25, 112, 200);
 	public static final Color GUI_COLOR_2 = new Color(255, 255, 255, 255);
 	
+	private static float mouseX;
+	private static float mouseY;
+	
 	private List<GuiElement> guiElements;
 	
 	public GuiManager(List<GuiElement> guiElements) {
 		this.guiElements = guiElements;
+		mouseX = 0;
+		mouseY = 0;
 	}
 	
 	public void render(Graphics2D g, ImageObserver observer) {
@@ -47,8 +52,10 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		mouseX = e.getX();
+		mouseY = e.getY();
 		for(GuiElement guiElement:guiElements) {
-			if(guiElement.mouseOver(e.getX(), e.getY())) {
+			if(guiElement.mouseOver(mouseX,mouseY)) {
 				guiElement.changeColor(GUI_COLOR_2);
 			} else {
 				guiElement.changeColor(GUI_COLOR_1);
@@ -77,6 +84,10 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 
 	public void removeAllElements() {
 		this.guiElements.clear();
+	}
+	
+	public static Vec2 getMousePosition() {
+		return new Vec2(mouseX, mouseY);
 	}
 
 	@Override

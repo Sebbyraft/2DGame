@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Timer.Clock;
 import display.GameWindow;
 import entities.Planet;
 import entities.PlanetsManager;
@@ -18,6 +17,7 @@ import gui.GuiManager;
 import gui.MapButton;
 import gui.MenuButton;
 import gui.PlayButton;
+import gui.ToolBar;
 import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -37,7 +37,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	public MapButton mapButton;
 	
-	public Clock clock;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -46,12 +45,13 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public GameMainLoop() {
 		
 		guis = new ArrayList<GuiElement>();
-		guis.add(new PlayButton(new Vec2(120, 5)));
-		guis.add(new MenuButton(new Vec2(10, 5)));
+		guis.add(new PlayButton(new Vec2(140, 20)));
+		guis.add(new MenuButton(new Vec2(20, 20)));
 		mapButton = new MapButton(new Vec2(20,  GameWindow.HEIGHT-120));
+		String[] imagesName = {"map","map","map","map","map","map","map","map"};
+		guis.add(new ToolBar("tool_bar", new Vec2(GameWindow.WIDTH-90, 30), new Vec2(64, 8*80), imagesName));
 		guis.add(mapButton);
 	
-		
 		planets = new ArrayList<Planet>();
 		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
 		startPlanet.setLocked(false);
@@ -67,8 +67,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 		planetsManager = new PlanetsManager(planets);
 		this.addMouseListener(planetsManager);
 		this.addMouseWheelListener(planetsManager);
-		
-		clock = new Clock(0, 0);
 		
 		new GameWindow(this);
 		
@@ -91,15 +89,12 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		//*************************************************************************************************
 		
-		System.out.println(getSystemTime());
-		
 		if(mapButton.getSelected()) {
 			planetsManager.render(g2d, this);
 		}
 		
 		guiManager.render(g2d, this);
 		
-		clock.update(getSystemTime());
 		//*************************************************************************************************
 
 		g.dispose();
