@@ -14,11 +14,13 @@ public abstract class GuiElement {
 	protected Vec2 position;
 	protected Vec2 size;
 	protected BufferedImage image;
+	protected String imageName;
 	
 	public GuiElement(String id,Vec2 position, Vec2 size, String imageName) {
 		this.id = id;
 		this.position = position;
 		this.size = size;
+		this.imageName = imageName;
 		this.image = Loader.loadImage("res/gui/"+imageName+".png");
 	}
 	
@@ -70,5 +72,14 @@ public abstract class GuiElement {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+	
 	
 }

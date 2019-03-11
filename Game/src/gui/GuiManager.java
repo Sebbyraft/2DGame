@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 import java.util.List;
 
 import display.GameWindow;
@@ -22,17 +23,17 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	private static float mouseX;
 	private static float mouseY;
 	
-	private List<GuiElement> guiElements;
+	private String clicked;
 	
-	public GuiManager(List<GuiElement> guiElements) {
-		this.guiElements = guiElements;
+	public List<GuiElement> guiElements = new ArrayList<GuiElement>();
+	
+	public GuiManager() {
+		clicked = " ";
 		mouseX = 0;
 		mouseY = 0;
 	}
 	
 	public void render(Graphics2D g, ImageObserver observer) {
-		//g.setColor(guiColor);
-		//g.fillRect((int)TOP_GUI_POSITION.getX(),(int)TOP_GUI_POSITION.getY(),(int)TOP_GUI_SIZE.getX(),(int)TOP_GUI_SIZE.getY());
 		for(GuiElement guiElement:guiElements) {
 			guiElement.render(g, observer);
 		}
@@ -44,7 +45,7 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 			if(guiElement.mouseOver(e.getX(), e.getY())) {
 				if(e.getButton() == MouseEvent.BUTTON1) {
 					guiElement.update();
-					System.out.println(guiElement.id);
+					clicked = guiElement.id;
 				} 
 			}
 		}
@@ -61,7 +62,29 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 				guiElement.changeColor(GUI_COLOR_1);
 			}
 		}
+	}
+	
+	private void update(float x, float y) {
+		for(GuiElement guiElement:guiElements) {
+			if(guiElement.getId().equalsIgnoreCase("tool_space_0")||
+					guiElement.getId().equalsIgnoreCase("tool_space_1")||
+					guiElement.getId().equalsIgnoreCase("tool_space_2")||
+					guiElement.getId().equalsIgnoreCase("tool_space_3")||
+					guiElement.getId().equalsIgnoreCase("tool_space_4")||
+					guiElement.getId().equalsIgnoreCase("tool_space_5")||
+					guiElement.getId().equalsIgnoreCase("tool_space_6")||
+					guiElement.getId().equalsIgnoreCase("tool_space_7")) {
+				
+					guiElement.setPosition(new Vec2(x, y));
+					 
+			}
+		}
 		
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		update(e.getX(), e.getY());
 	}
 
 	public void addGuiElement(GuiElement guiElement) {
@@ -89,13 +112,11 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	public static Vec2 getMousePosition() {
 		return new Vec2(mouseX, mouseY);
 	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	public String getClicked() {
+		return this.clicked;
+	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub

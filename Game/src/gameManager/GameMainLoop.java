@@ -12,12 +12,13 @@ import java.util.List;
 import display.GameWindow;
 import entities.Planet;
 import entities.PlanetsManager;
+import entities.TestEntity;
 import gui.GuiElement;
 import gui.GuiManager;
 import gui.MapButton;
 import gui.MenuButton;
 import gui.PlayButton;
-import gui.ToolBar;
+import gui.ToolSpace;
 import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -28,8 +29,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 	private Thread thread;
 	public int deltaMultiplier = 1;
 	public float systemTime = 0;
+	public String selection;
 	
-	public List<GuiElement> guis;	
 	public GuiManager guiManager;
 	
 	public List<Planet> planets;	
@@ -44,14 +45,26 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	public GameMainLoop() {
 		
-		guis = new ArrayList<GuiElement>();
-		guis.add(new PlayButton(new Vec2(140, 20)));
-		guis.add(new MenuButton(new Vec2(20, 20)));
+		selection = "";
+		
+		guiManager = new GuiManager();
+		this.addMouseListener(guiManager);
+		this.addMouseMotionListener(guiManager);
+		
+
+		guiManager.addGuiElement(new PlayButton(new Vec2(140, 20)));
+		guiManager.addGuiElement(new MenuButton(new Vec2(20, 20)));
 		mapButton = new MapButton(new Vec2(20,  GameWindow.HEIGHT-120));
-		String[] imagesName = {"map","map","map","map","map","map","map","map"};
-		guis.add(new ToolBar("tool_bar", new Vec2(GameWindow.WIDTH-90, 30), new Vec2(64, 8*80), imagesName));
-		guis.add(mapButton);
-	
+		guiManager.addGuiElement(new ToolSpace("tool_space_0", new Vec2(GameWindow.WIDTH-90, 30), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_1", new Vec2(GameWindow.WIDTH-90, 30+80), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_2", new Vec2(GameWindow.WIDTH-90, 30+80*2), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_3", new Vec2(GameWindow.WIDTH-90, 30+80*3), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_4", new Vec2(GameWindow.WIDTH-90, 30+80*4), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_5", new Vec2(GameWindow.WIDTH-90, 30+80*5), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_6", new Vec2(GameWindow.WIDTH-90, 30+80*6), "test"));
+		guiManager.addGuiElement(new ToolSpace("tool_space_7", new Vec2(GameWindow.WIDTH-90, 30+80*7), "test"));
+		guiManager.addGuiElement(mapButton);
+		
 		planets = new ArrayList<Planet>();
 		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
 		startPlanet.setLocked(false);
@@ -60,9 +73,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		planets.add(new Planet("p3", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_3"));
 		planets.add(new Planet("p4", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_4"));
 		
-		guiManager = new GuiManager(guis);
-		this.addMouseListener(guiManager);
-		this.addMouseMotionListener(guiManager);
+		
 		
 		planetsManager = new PlanetsManager(planets);
 		this.addMouseListener(planetsManager);
@@ -94,7 +105,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 		}
 		
 		guiManager.render(g2d, this);
-		
+
+			
+		selection = guiManager.getClicked();
+		//System.out.println(selection);
 		//*************************************************************************************************
 
 		g.dispose();

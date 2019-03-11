@@ -12,9 +12,9 @@ public class TestEntity extends Entity{
 	private BufferedImage image;
 	private static final String ID = "test_entity";
 
-	public TestEntity(Vec2 position, Vec2 size, String name) {
-		super(ID, position, size, name);
-		image = Loader.loadImage("res/"+name+".png");
+	public TestEntity(Vec2 position, Vec2 size) {
+		super(ID, position, size, "test");
+		image = Loader.loadImage("res/test.png");
 	}
 
 	@Override

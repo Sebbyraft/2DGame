@@ -14,15 +14,11 @@ public class ToolSpace extends GuiElement{
 	private Color color;
 	private static final Vec2 SIZE = new Vec2(64, 64);
 	private BufferedImage image;
-
+	
 	public ToolSpace(String id, Vec2 position,String imageName) {
 		super(id, position, SIZE, imageName);
 		color = GuiManager.GUI_COLOR_1;
 		image = Loader.loadImage("res/gui/"+imageName+".png");
-	}
-
-	@Override
-	public void update() {
 	}
 
 	@Override
@@ -36,6 +32,12 @@ public class ToolSpace extends GuiElement{
 	@Override
 	public void changeColor(Color color) {
 		this.color = color;
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
