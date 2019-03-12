@@ -36,8 +36,6 @@ public class ToolSpace extends GuiElement{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

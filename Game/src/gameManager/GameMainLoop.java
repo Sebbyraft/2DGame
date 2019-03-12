@@ -33,8 +33,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	public GuiManager guiManager;
 	
+	
 	public List<Planet> planets;	
-	public PlanetsManager planetsManager;
+	public List<Planet> planets2;	
+	public PlanetsManager planetsManager;	
 	
 	public MapButton mapButton;
 	
@@ -66,6 +68,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		guiManager.addGuiElement(mapButton);
 		
 		planets = new ArrayList<Planet>();
+		planets2 = new ArrayList<Planet>();
 		Planet startPlanet = new Planet("p1", new Vec2(GameWindow.WIDTH/2-512/2, GameWindow.HEIGHT/2-512/2), new Vec2(512, 512), "planet_5");
 		startPlanet.setLocked(false);
 		planets.add(startPlanet);
@@ -76,6 +79,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		
 		planetsManager = new PlanetsManager(planets);
+		
 		this.addMouseListener(planetsManager);
 		this.addMouseWheelListener(planetsManager);
 		
@@ -105,10 +109,19 @@ public class GameMainLoop extends Canvas implements Runnable{
 		}
 		
 		guiManager.render(g2d, this);
+		
+		for(Planet p:planets2) {
+			p.render(g2d, this);
+		}
 
-			
-		selection = guiManager.getClicked();
-		//System.out.println(selection);
+		
+			selection = guiManager.getClicked();
+		if(selection.equalsIgnoreCase("tool_space_0")) {
+			g.setColor(new Color(255, 255, 255));
+			//g.fillRect((int)GuiManager.getMousePosition().getX(),(int) GuiManager.getMousePosition().getY(), 300,300);
+			planets2.add(new Planet("p0", new Vec2(200, 200), new Vec2(100, 100),"planet_1"));
+			selection = " ";
+		}
 		//*************************************************************************************************
 
 		g.dispose();

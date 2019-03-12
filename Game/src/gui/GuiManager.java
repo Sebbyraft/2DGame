@@ -23,10 +23,11 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	private static float mouseX;
 	private static float mouseY;
 	
+	private boolean swpawn = false;
+	
 	private String clicked;
 	
 	public List<GuiElement> guiElements = new ArrayList<GuiElement>();
-	
 	public GuiManager() {
 		clicked = " ";
 		mouseX = 0;
@@ -41,50 +42,39 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		for(GuiElement guiElement:guiElements) {
-			if(guiElement.mouseOver(e.getX(), e.getY())) {
-				if(e.getButton() == MouseEvent.BUTTON1) {
+		if(e.getButton() == MouseEvent.BUTTON1) {
+			for(GuiElement guiElement:guiElements) {
+				if(guiElement.mouseOver(e.getX(), e.getY())) {
 					guiElement.update();
 					clicked = guiElement.id;
 				} 
 			}
+			
+		} else {
+			clicked = " ";
 		}
+		
 	}
-	
+
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		mouseX = e.getX();
 		mouseY = e.getY();
 		for(GuiElement guiElement:guiElements) {
-			if(guiElement.mouseOver(mouseX,mouseY)) {
-				guiElement.changeColor(GUI_COLOR_2);
-			} else {
-				guiElement.changeColor(GUI_COLOR_1);
+			if(!swpawn) {
+				if(guiElement.mouseOver(mouseX,mouseY)) {
+					guiElement.changeColor(GUI_COLOR_2);
+				} else {
+					guiElement.changeColor(GUI_COLOR_1);
+				}
 			}
 		}
 	}
-	
-	private void update(float x, float y) {
-		for(GuiElement guiElement:guiElements) {
-			if(guiElement.getId().equalsIgnoreCase("tool_space_0")||
-					guiElement.getId().equalsIgnoreCase("tool_space_1")||
-					guiElement.getId().equalsIgnoreCase("tool_space_2")||
-					guiElement.getId().equalsIgnoreCase("tool_space_3")||
-					guiElement.getId().equalsIgnoreCase("tool_space_4")||
-					guiElement.getId().equalsIgnoreCase("tool_space_5")||
-					guiElement.getId().equalsIgnoreCase("tool_space_6")||
-					guiElement.getId().equalsIgnoreCase("tool_space_7")) {
-				
-					guiElement.setPosition(new Vec2(x, y));
-					 
-			}
-		}
-		
-	}
+
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		update(e.getX(), e.getY());
+
 	}
 
 	public void addGuiElement(GuiElement guiElement) {
@@ -136,8 +126,10 @@ public class GuiManager implements MouseListener, MouseMotionListener{
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }
