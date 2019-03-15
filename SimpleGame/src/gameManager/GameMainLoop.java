@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import display.GameWindow;
+import test_entities.TestEntity;
+import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
 
@@ -16,6 +18,9 @@ public class GameMainLoop extends Canvas implements Runnable{
 	private Thread thread;
 	public int deltaMultiplier = 1;
 	public float systemTime = 0;
+	
+	
+	public TestEntity player;
 
 	
 	public static void main(String[] args) throws IOException{
@@ -23,8 +28,13 @@ public class GameMainLoop extends Canvas implements Runnable{
 	}
 	
 	public GameMainLoop() {
-		new GameWindow(this);
 		
+		player = new TestEntity(new Vec2(WIDTH/2, HEIGHT/2), new Vec2(100, 100));
+		this.addMouseMotionListener(player);
+		this.addMouseListener(player);
+				
+		
+		new GameWindow(this);
 	}
 
 	private void render() {
@@ -43,8 +53,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g2d.setColor(new Color(22, 22, 22));
 		g2d.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		//*************************************************************************************************
-		
-	
+		player.render(g2d, this);
+		player.update();
 		//*************************************************************************************************
 
 		g.dispose();
