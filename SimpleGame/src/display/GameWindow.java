@@ -16,14 +16,13 @@ public class GameWindow extends Canvas{
 	private boolean visible = true;
 	private static JFrame frame;
 	
-	public static final int WIDTH = 1280;
-	public static final int HEIGHT = 720;
+	public static final Vec2 WINDOW_SIZE = new Vec2(1280, 720);
 	
 	private static final String TITLE = "Game";
 	
 	public GameWindow(GameMainLoop game) {
 		frame = new JFrame(TITLE);
-		Dimension dimension = new Dimension(WIDTH,HEIGHT);
+		Dimension dimension = new Dimension((int)WINDOW_SIZE.getX(),(int)WINDOW_SIZE.getY());
 		frame.setPreferredSize(dimension);
 		frame.setSize(dimension);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
