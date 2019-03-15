@@ -10,6 +10,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 import display.GameWindow;
 import toolkit.Maths;
 import toolkit.Vec2;
@@ -35,7 +37,8 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 		super(ID, position, rotation, size, "test");
 		projectiles = new ArrayList<TestProjectile>();
 		direction = new Vec2(1, 0);
-		viewfinder = RIGHT;
+		viewfinder = new Vec2(0, 0);
+		this.viewfinder.setValue(RIGHT);
 	}
 
 	@Override
@@ -50,7 +53,7 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.setColor(new Color(255, 255, 255));
-		//g2d.rotate(rotation, (int)(position.getX()+size.getX()/2), (int)(position.getY()+size.getY()/2));
+		g2d.rotate(rotation, (int)(position.getX()+size.getX()/2), (int)(position.getY()+size.getY()/2));
 		g2d.fillRect((int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY());
 		
 		g2d.setColor(new Color(20, 20, 255));
@@ -110,25 +113,22 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		if(e.getKeyChar() == 'w') {
 			this.direction.setX(0);
 			this.direction.setY(-1);
-			
 			this.viewfinder.setValue(TOP);
 		} else if(e.getKeyChar() == 's') {
 			this.direction.setX(0);
 			this.direction.setY(1);
-			
 			this.viewfinder.setValue(BOT);
-		}else if(e.getKeyChar() == 'd') {
+		} else if(e.getKeyChar() == 'd') {
 			this.direction.setX(1);
 			this.direction.setY(0);
-			
 			this.viewfinder.setValue(RIGHT);
 		} else if(e.getKeyChar() == 'a') {
 			this.direction.setX(-1);
 			this.direction.setY(0);
-			
 			this.viewfinder.setValue(LEFT);
 		}
 	}
