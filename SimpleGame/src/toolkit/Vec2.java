@@ -23,4 +23,10 @@ public class Vec2 {
 	public void setY(float y) {
 		this.y = y;
 	}
+	
+	public void setValue(Vec2 value) {
+		this.x = value.getX();
+		this.y = value.getY();
+	}
+
 }

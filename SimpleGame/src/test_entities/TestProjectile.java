@@ -19,14 +19,14 @@ public class TestProjectile extends Entity{
 
 	@Override
 	public void update() {
-		this.position.setX(this.position.getX() + VELOCITY * direction.getX());
-		this.position.setY(this.position.getY() + VELOCITY * direction.getY());
+		this.position.setX(this.position.getX()  + VELOCITY * direction.getX());
+		this.position.setY(this.position.getY()  + VELOCITY * direction.getY());
 	}
 
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.setColor(new Color(255, 30, 30));
-		g2d.rotate(rotation, (int)(position.getX()+size.getX()/2), (int)(position.getY()+size.getY()/2));
+		//g2d.rotate(rotation, (int)(position.getX()+size.getX()/2), (int)(position.getY()+size.getY()/2));
 		g2d.fillRect((int)this.position.getX(), (int)this.position.getY(), (int)size.getX(), (int)size.getY());
 	}
 
