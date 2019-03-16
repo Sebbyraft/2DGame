@@ -10,13 +10,13 @@ import toolkit.Vec2;
 
 public class Bullet extends Entity{
 	
-	private static final String ID = "test_projectile";
+	private static final String ID = "bullet";
 	private static final float VELOCITY = 3f;
 	private Vec2 direction;
 	private BufferedImage projectileImage;
 
 	public Bullet(Vec2 position, Vec2 direction) {
-		super(ID, position, 0, new Vec2(8, 8), "test");
+		super(ID, position, 0, new Vec2(8, 8), "bullet");
 		this.direction = direction;
 		projectileImage = Loader.loadImage("res/bullet.png");
 	}

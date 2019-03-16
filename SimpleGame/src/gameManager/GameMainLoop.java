@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import display.GameWindow;
 import entity.Player;
+import entity.ViewFinder;
 import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -22,7 +23,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	
 	public Player player;
-
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -30,12 +30,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	public GameMainLoop() {
 		player = new Player(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(112, 112));
-		
-		this.addMouseMotionListener(player);
 		this.addMouseListener(player);
 		this.addKeyListener(player);
-		
-		
+	
+		//****************************************************************************
 		new GameWindow(this);
 	}
 
@@ -59,7 +57,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		player.render(g2d, this);
 		player.update();
-		
 		
 		//*************************************************************************************************
 
