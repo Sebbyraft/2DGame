@@ -12,7 +12,9 @@ import display.GameWindow;
 import entity.Player;
 import entity.Shield;
 import gui.ScoreText;
-import gui.MenuButton;
+import gui.Menu;
+import gui.MenuItem;
+import gui.MenuItems;
 import loader.Loader;
 import toolkit.Vec2;
 
@@ -29,8 +31,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public Player player;
 	public Shield shield;
 	
-	public MenuButton menu;
+	public Menu menu;
+	public MenuItems menuItems;
 	public ScoreText score;
+	
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -46,9 +50,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		background = Loader.loadImage("res/background.png");
 
-		menu = new MenuButton(new Vec2(30, 30));
+		menu = new Menu(new Vec2(30, 30));
 		this.addMouseListener(menu);
 		this.addMouseMotionListener(menu);
+		menuItems = new MenuItems(menu);
+		this.addMouseMotionListener(menuItems);
 		
 		score = new ScoreText("score", new Vec2(200, 60));
 	
@@ -99,6 +105,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		shield.render(g2d, observer);
 		menu.render(g2d, observer);
 		score.update(player.getScore());
+		menuItems.render(g2d, observer);
 	}
 	
 

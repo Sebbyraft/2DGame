@@ -30,6 +30,7 @@ public abstract class GuiElement {
 		}else return false;
 	}
 	
+
 	public Vec2 getPosition() {
 		return position;
 	}
@@ -53,5 +54,7 @@ public abstract class GuiElement {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+
 	
 }

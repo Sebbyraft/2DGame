@@ -41,7 +41,6 @@ public class ScoreText extends GuiElement{
 	@Override
 	public void changeColor(Color color) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

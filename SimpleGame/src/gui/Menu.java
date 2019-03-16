@@ -13,7 +13,7 @@ import display.GameWindow;
 import loader.Loader;
 import toolkit.Vec2;
 
-public class MenuButton extends GuiElement implements MouseListener, MouseMotionListener{
+public class Menu extends GuiElement implements MouseListener, MouseMotionListener{
 	
 	private static final String ID = "menu_button";
 	private static final Vec2 SIZE = new Vec2(32*3, 32);
@@ -24,8 +24,8 @@ public class MenuButton extends GuiElement implements MouseListener, MouseMotion
 	private boolean menuOpened = false;
 	private BufferedImage image;
 	private Color color;
-
-	public MenuButton(Vec2 position) {
+	
+	public Menu(Vec2 position) {
 		super(ID, position, SIZE);
 		color = COLOR_2;
 		image = Loader.loadImage("res/gui/menu.png");
@@ -49,15 +49,6 @@ public class MenuButton extends GuiElement implements MouseListener, MouseMotion
 	}
 
 	@Override
-	public void changeColor(Color color) {
-		this.color = color;
-	}
-	
-	public boolean getMenuStatus() {
-		return this.menuOpened;
-	}
-
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == 1) {
 			if(mouseOver(e.getX(), e.getY())) {
@@ -71,14 +62,25 @@ public class MenuButton extends GuiElement implements MouseListener, MouseMotion
 	}
 	
 	
-
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(mouseOver(e.getX(), e.getY())) {
+		float x = e.getX();
+		float y = e.getY();
+		
+		if(mouseOver(x, y)) {
 			changeColor(COLOR_1);
 		} else {
 			changeColor(COLOR_2);
 		}
+	}
+	
+	@Override
+	public void changeColor(Color color) {
+		this.color = color;
+	}
+	
+	public boolean getMenuStatus() {
+		return this.menuOpened;
 	}
 
 	@Override
@@ -110,8 +112,5 @@ public class MenuButton extends GuiElement implements MouseListener, MouseMotion
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
 
 }
