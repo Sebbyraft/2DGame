@@ -7,13 +7,11 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
-import java.util.Observer;
-
-import javax.swing.GrayFilter;
 
 import display.GameWindow;
 import entity.Player;
 import entity.Shield;
+import gui.ScoreText;
 import gui.MenuButton;
 import loader.Loader;
 import toolkit.Vec2;
@@ -32,6 +30,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public Shield shield;
 	
 	public MenuButton menu;
+	public ScoreText score;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -46,11 +45,12 @@ public class GameMainLoop extends Canvas implements Runnable{
 		this.addMouseMotionListener(shield);
 		
 		background = Loader.loadImage("res/background.png");
-		
-		
+
 		menu = new MenuButton(new Vec2(30, 30));
 		this.addMouseListener(menu);
 		this.addMouseMotionListener(menu);
+		
+		score = new ScoreText("score", new Vec2(200, 60));
 	
 		//****************************************************************************
 		new GameWindow(this);
@@ -74,8 +74,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g2d.drawImage(background, 0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY(), this);
 		//*************************************************************************************************
 		
+		score.render(g2d, this);
+		
 		if(menu.getMenuStatus() == false) {
 			update();
+			
 		}
 		
 		render(g2d, this);
@@ -95,6 +98,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		player.render(g2d, observer);
 		shield.render(g2d, observer);
 		menu.render(g2d, observer);
+		score.update(player.getScore());
 	}
 	
 

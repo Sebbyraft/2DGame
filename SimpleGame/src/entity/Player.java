@@ -28,6 +28,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 	private ArrayList<Bullet> bullets;
 	private BufferedImage playerImg;
 	private ViewFinder viewFinder;
+	private int score = 0;
 	
 	public Player(Vec2 position, Vec2 size) {
 		super(ID, position, rotation, size, "test");
@@ -50,6 +51,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 			float d = Maths.dist(bullets.get(i).getPosition(), viewFinder.getPosition());
 			if(d < (viewFinder.getSize().getX()/2+viewFinder.getSize().getY()/2)/2) {
 				bullets.remove(i);
+				score = score + 1;
 			}
 		}
 	}
@@ -107,6 +109,11 @@ public class Player extends Entity implements MouseListener, KeyListener{
 			this.direction.setX(-1);
 			this.direction.setY(0);
 		}
+	}
+	
+	
+	public int getScore() {
+		return this.score;
 	}
 
 	@Override

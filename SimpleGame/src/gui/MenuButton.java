@@ -6,26 +6,29 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import display.GameWindow;
+import loader.Loader;
 import toolkit.Vec2;
 
 public class MenuButton extends GuiElement implements MouseListener, MouseMotionListener{
 	
 	private static final String ID = "menu_button";
-	private static final String IMAGE_NAME = "menu";
 	private static final Vec2 SIZE = new Vec2(32*3, 32);
 	
 	private static final Color COLOR_1 = new Color(255, 255, 255, 255);
 	private static final Color COLOR_2 = new Color(50, 50, 205, 150);
 	
 	private boolean menuOpened = false;
+	private BufferedImage image;
 	private Color color;
 
 	public MenuButton(Vec2 position) {
-		super(ID, position, SIZE, IMAGE_NAME);
+		super(ID, position, SIZE);
 		color = COLOR_2;
+		image = Loader.loadImage("res/gui/menu.png");
 	}
 
 	@Override
@@ -58,7 +61,6 @@ public class MenuButton extends GuiElement implements MouseListener, MouseMotion
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == 1) {
 			if(mouseOver(e.getX(), e.getY())) {
-				System.out.println(menuOpened);
 				if(menuOpened == false) {
 					menuOpened = true;
 				} else {
