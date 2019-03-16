@@ -1,18 +1,17 @@
 package test_entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.RequestingUserName;
-
 import display.GameWindow;
+import loader.Loader;
 import toolkit.Maths;
 import toolkit.Vec2;
 
@@ -20,11 +19,13 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 	
 	private static final String ID = "test_entity";
 	
-	private static final Vec2 TOP = new Vec2(GameWindow.WINDOW_SIZE.getX()/2, 0);
-	private static final Vec2 BOT = new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()-62);
-	private static final Vec2 RIGHT = new Vec2(GameWindow.WINDOW_SIZE.getX()-40, GameWindow.WINDOW_SIZE.getY()/2);
-	private static final Vec2 LEFT = new Vec2(0, GameWindow.WINDOW_SIZE.getY()/2);
+	private  Vec2 TOP;
+	private  Vec2 BOT;
+	private  Vec2 RIGHT;
+	private  Vec2 LEFT;
 
+	private static final int MAX_N_PROJECTILES = 5;
+	private static final int MAX_PROJECTILES_DISTANCE = 700;
 
 	private boolean floating = false;
 	private static float rotation = 0;
@@ -32,13 +33,22 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 	private Vec2 viewfinder;
 	
 	private ArrayList<TestProjectile> projectiles;
+	private BufferedImage playerImg, playerViewfinder;
 	
 	public TestEntity(Vec2 position, Vec2 size) {
 		super(ID, position, rotation, size, "test");
+		
+		TOP = new Vec2(position.getX()+size.getX()/2-16, 0);
+		BOT = new Vec2(position.getX()+size.getX()/2-16, GameWindow.WINDOW_SIZE.getY()-60);
+		RIGHT = new Vec2(GameWindow.WINDOW_SIZE.getX()-40, position.getY()+size.getY()/2-16);
+		LEFT = new Vec2(0, position.getY()+size.getY()/2-16);
+		
 		projectiles = new ArrayList<TestProjectile>();
 		direction = new Vec2(1, 0);
 		viewfinder = new Vec2(0, 0);
 		this.viewfinder.setValue(RIGHT);
+		playerImg = Loader.loadImage("res/player.png");
+		playerViewfinder = Loader.loadImage("res/pointer.png");
 	}
 
 	@Override
@@ -52,12 +62,10 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
-		g2d.setColor(new Color(255, 255, 255));
 		g2d.rotate(rotation, (int)(position.getX()+size.getX()/2), (int)(position.getY()+size.getY()/2));
-		g2d.fillRect((int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY());
 		
-		g2d.setColor(new Color(20, 20, 255));
-		g2d.fillRect((int)(viewfinder.getX()), (int)(viewfinder.getY()), 32, 32);
+		g2d.drawImage(playerImg, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
+		g2d.drawImage(playerViewfinder, (int)(viewfinder.getX()), (int)(viewfinder.getY()), 32, 32, observer);
 		
 		renderProjectiles(g2d, observer);
 		updateProjectiles();
@@ -87,10 +95,12 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 				}
 			}
 		} else { // Fire
-			if(projectiles.size() < 4) {
-				float x = position.getX() + size.getX()/2 - 16;
-				float y = position.getY() + size.getY()/2 - 16;
-				projectiles.add(new TestProjectile(new Vec2(x, y), direction));
+			if(projectiles.size() < MAX_N_PROJECTILES) {
+				if(this.floating == false) {
+					float x = position.getX() + size.getX()/2 - 4;
+					float y = position.getY() + size.getY()/2 - 4;
+					projectiles.add(new TestProjectile(new Vec2(x, y), direction));
+				}
 			}
 		}
 	}
@@ -104,7 +114,7 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 
 	private void updateProjectiles() {
 		for(TestProjectile p:projectiles) {
-			if(Maths.dist(p.position, new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2))> 1000) {
+			if(Maths.dist(p.getPosition(), new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2)) >= MAX_PROJECTILES_DISTANCE) {
 				projectiles.remove(p);
 				return;
 			} 
@@ -117,18 +127,22 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 		if(e.getKeyChar() == 'w') {
 			this.direction.setX(0);
 			this.direction.setY(-1);
+			
 			this.viewfinder.setValue(TOP);
 		} else if(e.getKeyChar() == 's') {
 			this.direction.setX(0);
 			this.direction.setY(1);
+			
 			this.viewfinder.setValue(BOT);
 		} else if(e.getKeyChar() == 'd') {
 			this.direction.setX(1);
 			this.direction.setY(0);
+			
 			this.viewfinder.setValue(RIGHT);
 		} else if(e.getKeyChar() == 'a') {
 			this.direction.setX(-1);
 			this.direction.setY(0);
+			
 			this.viewfinder.setValue(LEFT);
 		}
 	}

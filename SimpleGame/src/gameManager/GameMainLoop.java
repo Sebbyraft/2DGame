@@ -29,7 +29,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	}
 	
 	public GameMainLoop() {
-		entity = new TestEntity(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(100, 100));
+		entity = new TestEntity(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(112, 112));
 		
 		this.addMouseMotionListener(entity);
 		this.addMouseListener(entity);
