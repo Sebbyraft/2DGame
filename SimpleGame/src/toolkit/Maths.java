@@ -3,7 +3,6 @@ package toolkit;
 
 public class Maths {
 	
-	
 	public static float dist(Vec2 positionA, Vec2 positionB) {
 		float x = positionA.getX() - positionB.getX();
 		float y = positionA.getY() - positionB.getY();

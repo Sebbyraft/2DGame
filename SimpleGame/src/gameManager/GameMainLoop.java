@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
 import java.io.IOException;
 
 import display.GameWindow;
-import test_entities.TestEntity;
+import entity.Player;
 import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -21,7 +21,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public float systemTime = 0;
 	
 	
-	public TestEntity entity;
+	public Player player;
 
 	
 	public static void main(String[] args) throws IOException{
@@ -29,11 +29,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 	}
 	
 	public GameMainLoop() {
-		entity = new TestEntity(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(112, 112));
+		player = new Player(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(112, 112));
 		
-		this.addMouseMotionListener(entity);
-		this.addMouseListener(entity);
-		this.addKeyListener(entity);
+		this.addMouseMotionListener(player);
+		this.addMouseListener(player);
+		this.addKeyListener(player);
 		
 		
 		new GameWindow(this);
@@ -57,8 +57,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 		//*************************************************************************************************
 		
 		
-		entity.render(g2d, this);
-		entity.update();
+		player.render(g2d, this);
+		player.update();
 		
 		
 		//*************************************************************************************************

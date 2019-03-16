@@ -1,4 +1,4 @@
-package test_entities;
+package entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;

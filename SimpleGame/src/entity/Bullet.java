@@ -1,4 +1,4 @@
-package test_entities;
+package entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,14 +8,14 @@ import entity.Entity;
 import loader.Loader;
 import toolkit.Vec2;
 
-public class TestProjectile extends Entity{
+public class Bullet extends Entity{
 	
 	private static final String ID = "test_projectile";
 	private static final float VELOCITY = 3f;
 	private Vec2 direction;
 	private BufferedImage projectileImage;
 
-	public TestProjectile(Vec2 position, Vec2 direction) {
+	public Bullet(Vec2 position, Vec2 direction) {
 		super(ID, position, 0, new Vec2(8, 8), "test");
 		this.direction = direction;
 		projectileImage = Loader.loadImage("res/bullet.png");

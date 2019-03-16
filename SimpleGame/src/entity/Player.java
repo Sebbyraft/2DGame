@@ -1,4 +1,4 @@
-package test_entities;
+package entity;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -17,12 +17,12 @@ import loader.Loader;
 import toolkit.Maths;
 import toolkit.Vec2;
 
-public class TestEntity extends Entity implements MouseMotionListener, MouseListener, KeyListener{
+public class Player extends Entity implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private static final String ID = "test_entity";
 	
-	private static final int MAX_N_PROJECTILES = 5;
-	private static final int MAX_PROJECTILES_DISTANCE = 700;
+	private static final int MAX_N_bullets = 5;
+	private static final int MAX_bullets_DISTANCE = 700;
 	private static final int NEW_POSITION_TIME = 1000;
 
 	private boolean floating = false;
@@ -30,16 +30,16 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 	private Vec2 direction;
 	private Vec2 viewfinder;
 	
-	private ArrayList<TestProjectile> projectiles;
+	private ArrayList<Bullet> bullets;
 	private BufferedImage playerImg, playerViewfinder;
 	
 	private Random r = new Random();
 	private int newPosition = 0;
 	
-	public TestEntity(Vec2 position, Vec2 size) {
+	public Player(Vec2 position, Vec2 size) {
 		super(ID, position, rotation, size, "test");
 		
-		projectiles = new ArrayList<TestProjectile>();
+		bullets = new ArrayList<Bullet>();
 		direction = new Vec2(1, 0);
 		viewfinder = new Vec2(0, 0);
 		this.viewfinder.setValue(new Vec2(GameWindow.WINDOW_SIZE.getX()-40, position.getY()+size.getY()/2-16));
@@ -54,7 +54,7 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 		} else {
 			rotation = 0;
 			updateViewfinder();
-			updateProjectiles();
+			updatebullets();
 		}
 	}
 
@@ -64,7 +64,7 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 		g2d.drawImage(playerImg, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
 		
 		renderViewfinder(g2d, observer);
-		renderProjectiles(g2d, observer);
+		renderbullets(g2d, observer);
 	}
 
 	private void renderViewfinder(Graphics2D g2d, ImageObserver observer) {
@@ -119,27 +119,27 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 				}
 			}
 		} else { // Fire
-			if(projectiles.size() < MAX_N_PROJECTILES) {
+			if(bullets.size() < MAX_N_bullets) {
 				if(this.floating == false) {
 					float x = position.getX() + size.getX()/2 - 4;
 					float y = position.getY() + size.getY()/2 - 4;
-					projectiles.add(new TestProjectile(new Vec2(x, y), direction));
+					bullets.add(new Bullet(new Vec2(x, y), direction));
 				}
 			}
 		}
 	}
 	
-	private void renderProjectiles(Graphics2D g2d, ImageObserver observer) {
-		for(TestProjectile p:projectiles) {
+	private void renderbullets(Graphics2D g2d, ImageObserver observer) {
+		for(Bullet p:bullets) {
 			p.render(g2d, observer);
 			p.update();
 		}
 	}
 
-	private void updateProjectiles() {
-		for(TestProjectile p:projectiles) {
-			if(Maths.dist(p.getPosition(), new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2)) >= MAX_PROJECTILES_DISTANCE) {
-				projectiles.remove(p);
+	private void updatebullets() {
+		for(Bullet p:bullets) {
+			if(Maths.dist(p.getPosition(), new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2)) >= MAX_bullets_DISTANCE) {
+				bullets.remove(p);
 				return;
 			} 
 		}
