@@ -1,7 +1,6 @@
 package gameManager;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
@@ -10,6 +9,7 @@ import java.io.IOException;
 
 import display.GameWindow;
 import entity.Player;
+import entity.Shield;
 import loader.Loader;
 import toolkit.Vec2;
 
@@ -23,8 +23,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public float systemTime = 0;
 	
 	public BufferedImage background;
-	
 	public Player player;
+	public Shield shield;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -35,6 +35,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 		this.addMouseListener(player);
 		this.addKeyListener(player);
 		
+		shield = new Shield(new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2));
+		this.addMouseMotionListener(shield);
 		
 		background = Loader.loadImage("res/background.png");
 	
@@ -64,6 +66,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 		player.render(g2d, this);
 		player.update();
 		
+		shield.render(g2d, this);
+		shield.update();
 		//*************************************************************************************************
 
 		g.dispose();
