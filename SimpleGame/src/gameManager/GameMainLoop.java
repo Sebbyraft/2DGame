@@ -5,11 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import display.GameWindow;
 import entity.Player;
-import entity.ViewFinder;
+import loader.Loader;
 import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -18,9 +19,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 
 	private boolean running = true;
 	private Thread thread;
-	public int deltaMultiplier = 1;
+	public int deltaMultiplier = 4;
 	public float systemTime = 0;
 	
+	public BufferedImage background;
 	
 	public Player player;
 	
@@ -32,6 +34,9 @@ public class GameMainLoop extends Canvas implements Runnable{
 		player = new Player(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(112, 112));
 		this.addMouseListener(player);
 		this.addKeyListener(player);
+		
+		
+		background = Loader.loadImage("res/background.png");
 	
 		//****************************************************************************
 		new GameWindow(this);
@@ -50,8 +55,9 @@ public class GameMainLoop extends Canvas implements Runnable{
 		Graphics2D g2d = (Graphics2D)g;
 		
 		//*************************************************************************************************
-		g2d.setColor(new Color(22, 22, 22));
-		g2d.fillRect(0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY());
+		//g2d.setColor(new Color(22, 22, 22));
+		//g2d.fillRect(0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY());
+		g2d.drawImage(background, 0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY(), this);
 		//*************************************************************************************************
 		
 		

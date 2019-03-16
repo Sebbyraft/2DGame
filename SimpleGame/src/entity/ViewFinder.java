@@ -19,7 +19,7 @@ public class ViewFinder extends Entity{
 	private BufferedImage img;
 	
 	public ViewFinder(Vec2 position) {
-		super(ID, position, 0, new Vec2(0, 0), "viewFinder");
+		super(ID, position, 0, new Vec2(64, 64), "viewFinder");
 		img = Loader.loadImage("res/pointer.png");
 	}
 	
@@ -27,16 +27,16 @@ public class ViewFinder extends Entity{
 		if(newPosition > NEW_POSITION_TIME * (1 + r.nextInt(3))) {
 			switch (r.nextInt(4)) {
 			case 0:
-				position.setValue(new Vec2(p.getPosition().getX()+p.getSize().getX()/2-16, 0));
+				position.setValue(new Vec2(p.getPosition().getX()+p.getSize().getX()/2-size.getX()/2, 0));
 				break;
 			case 1:
-				position.setValue(new Vec2(p.getPosition().getX()+p.getSize().getX()/2-16, GameWindow.WINDOW_SIZE.getY()-60));
+				position.setValue(new Vec2(p.getPosition().getX()+p.getSize().getX()/2-size.getX()/2, GameWindow.WINDOW_SIZE.getY()-60-size.getY()/2));
 				break;
 			case 2:
-				position.setValue(new Vec2(0, p.getPosition().getY()+p.getSize().getY()/2-16));
+				position.setValue(new Vec2(0, p.getPosition().getY()+p.getSize().getY()/2-size.getY()/2));
 				break;
 			case 3:
-				position.setValue(new Vec2(GameWindow.WINDOW_SIZE.getX()-40, p.getPosition().getY()+p.getSize().getY()/2-16));
+				position.setValue(new Vec2(GameWindow.WINDOW_SIZE.getX()-40-size.getX()/2, p.getPosition().getY()+p.getSize().getY()/2-size.getY()/2));
 				break;
 			default:
 				break;
@@ -49,8 +49,7 @@ public class ViewFinder extends Entity{
 
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
-		g2d.drawImage(img, (int)(position.getX()), (int)(position.getY()), 32, 32, observer);
-		
+		g2d.drawImage(img, (int)(position.getX()), (int)(position.getY()), (int)(size.getX()), (int)(size.getY()), observer);	
 	}
 
 	@Override

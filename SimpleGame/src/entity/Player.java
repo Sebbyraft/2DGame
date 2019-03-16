@@ -35,7 +35,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		bullets = new ArrayList<Bullet>();
 		direction = new Vec2(1, 0);
 		
-		viewFinder = new ViewFinder(new Vec2(GameWindow.WINDOW_SIZE.getX()-40, position.getY()+size.getY()/2-16));
+		viewFinder = new ViewFinder(new Vec2(GameWindow.WINDOW_SIZE.getX()-64, position.getY()+size.getY()/2-32));
 		playerImg = Loader.loadImage("res/player.png");
 		
 	}
