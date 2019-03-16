@@ -5,11 +5,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
+import java.util.Observer;
+
+import javax.swing.GrayFilter;
 
 import display.GameWindow;
 import entity.Player;
 import entity.Shield;
+import gui.MenuButton;
 import loader.Loader;
 import toolkit.Vec2;
 
@@ -19,12 +24,14 @@ public class GameMainLoop extends Canvas implements Runnable{
 
 	private boolean running = true;
 	private Thread thread;
-	public int deltaMultiplier = 4;
+	public int deltaMultiplier = 1;
 	public float systemTime = 0;
 	
 	public BufferedImage background;
 	public Player player;
 	public Shield shield;
+	
+	public MenuButton menu;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -39,6 +46,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 		this.addMouseMotionListener(shield);
 		
 		background = Loader.loadImage("res/background.png");
+		
+		
+		menu = new MenuButton(new Vec2(30, 30));
+		this.addMouseListener(menu);
+		this.addMouseMotionListener(menu);
 	
 		//****************************************************************************
 		new GameWindow(this);
@@ -62,17 +74,29 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g2d.drawImage(background, 0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY(), this);
 		//*************************************************************************************************
 		
+		if(menu.getMenuStatus() == false) {
+			update();
+		}
 		
-		player.render(g2d, this);
-		player.update();
+		render(g2d, this);
 		
-		shield.render(g2d, this);
-		shield.update();
 		//*************************************************************************************************
 
 		g.dispose();
 		bs.show();
 	}
+	
+	public void update() {
+		player.update();
+		shield.update();
+	}
+	
+	public void render(Graphics2D g2d, ImageObserver observer) {
+		player.render(g2d, observer);
+		shield.render(g2d, observer);
+		menu.render(g2d, observer);
+	}
+	
 
 	@SuppressWarnings("unused")
 	public void run() {

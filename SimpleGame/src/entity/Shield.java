@@ -28,35 +28,32 @@ public class Shield extends Entity implements MouseMotionListener{
 
 	@Override
 	public void update() {
-		float x = (float) (RADIUS * Math.cos(angle));
-		float y = (float) (-RADIUS * Math.sin(angle));
-		
-		offset.setValue(new Vec2(x, y));
+		offset.setValue(getCoordinates(angle));
 	}
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
-
 		float x = (e.getX() / GameWindow.WINDOW_SIZE.getX() - 0.5f) * 2f;
 		float y = (e.getY() / GameWindow.WINDOW_SIZE.getY() - 0.5f) * 2f;
-		
-//		System.out.println("angle: "+angle+" x: "+ x + " y: "+ y);
-	
-		angle = (float) Math.atan2(x, y);
+		angle = getAngle(x, y, 0);
 	}
-
+	
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.drawImage(shield, (int)(position.getX()+offset.getX()-18), (int)(position.getY()+offset.getY()-18), (int)size.getX(), (int)size.getY(), observer);
 	}
+	
+	private float getAngle(float x, float y, float offset) {
+		return (float) (Math.atan2(x, y) + offset);
+	}
+	
+	private Vec2 getCoordinates(float angle) {
+		float x = (float) (RADIUS * Math.cos(angle));
+		float y = (float) (-RADIUS * Math.sin(angle));
+		return new Vec2(x, y);
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
-
-	
-
 }

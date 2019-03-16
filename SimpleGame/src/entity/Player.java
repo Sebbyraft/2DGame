@@ -34,16 +34,24 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		
 		bullets = new ArrayList<Bullet>();
 		direction = new Vec2(1, 0);
-		
 		viewFinder = new ViewFinder(new Vec2(GameWindow.WINDOW_SIZE.getX()-64, position.getY()+size.getY()/2-32));
 		playerImg = Loader.loadImage("res/player.png");
-		
 	}
 
 	@Override
 	public void update() {
 		updatebullets();
 		viewFinder.update(this);
+		collider();
+	}
+	
+	private void collider() {
+		for(int i = 0; i < bullets.size(); i++) {
+			float d = Maths.dist(bullets.get(i).getPosition(), viewFinder.getPosition());
+			if(d < (viewFinder.getSize().getX()/2+viewFinder.getSize().getY()/2)/2) {
+				bullets.remove(i);
+			}
+		}
 	}
 
 	@Override
@@ -63,6 +71,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 				float x = position.getX() + size.getX()/2 - 4;
 				float y = position.getY() + size.getY()/2 - 4;
 				bullets.add(new Bullet(new Vec2(x, y), direction));
+				return;
 			}
 		}
 	}
