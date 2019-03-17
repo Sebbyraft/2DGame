@@ -43,6 +43,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		player = new Player(new Vec2(GameWindow.WINDOW_SIZE.getX()/2-50, GameWindow.WINDOW_SIZE.getY()/2-50), new Vec2(112, 112));
 		this.addMouseListener(player);
 		this.addKeyListener(player);
+		this.addMouseMotionListener(player);
 		
 		shield = new Shield(new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2));
 		this.addMouseMotionListener(shield);
@@ -96,7 +97,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public void update() {
 		player.update();
 		player.setUpgrade(score.getUpdate(player.getScore()));
-		shield.update();
+		//shield.update();
 		menuItems.update();
 		if(menuItems.getReset()) {
 			player.setScore(0);
@@ -108,7 +109,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		score.render(g2d, this);
 		player.render(g2d, observer);
-		shield.render(g2d, observer);
+		//shield.render(g2d, observer);
 		menu.render(g2d, observer);
 		menuItems.render(g2d, observer);
 	}

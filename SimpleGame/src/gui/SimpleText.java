@@ -22,7 +22,6 @@ public class SimpleText extends GuiElement{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import loader.ImageLoader;
 import toolkit.Maths;
 import toolkit.Vec2;
 
-public class Player extends Entity implements MouseListener, KeyListener{
+public class Player extends Entity implements MouseListener, MouseMotionListener ,KeyListener{
 	
 	private static final String ID = "player";
 
@@ -30,6 +31,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 	private int score = 0;
 	private boolean fire = false;
 	private int upgrade = 1;
+	private Shield shield;
 	
 	public Player(Vec2 position, Vec2 size) {
 		super(ID, position, rotation, size, "test");
@@ -38,6 +40,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		direction = new Vec2(1, 0);
 		viewFinder = new ViewFinder(new Vec2(GameWindow.WINDOW_SIZE.getX()-64, position.getY()+size.getY()/2-32));
 		playerImg = ImageLoader.loadImage("res/player.png");
+		shield = new Shield(new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2));
 	}
 
 	@Override
@@ -46,6 +49,12 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		updatebullets();
 		viewFinder.update(this);
 		collider();
+	}
+	
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		shield.update(e.getX(), e.getY());
 	}
 	
 	private void fire() {
@@ -65,6 +74,15 @@ public class Player extends Entity implements MouseListener, KeyListener{
 			if(d < (viewFinder.getSize().getX()/2+viewFinder.getSize().getY()/2)/2) {
 				bullets.remove(i);
 				score = score + 1;
+				return;
+			}
+			d = Maths.dist(bullets.get(i).getPosition(), shield.getUpdatedPosition());
+			System.out.println(d);
+			if(d < (shield.getSize().getX()/2+shield.getSize().getY()/2)/2) {
+				bullets.remove(i);
+				if(score > 0)
+					score = score - 1;
+				return;
 			}
 		}
 	}
@@ -76,6 +94,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		
 		renderbullets(g2d, observer);
 		viewFinder.render(g2d, observer);
+		shield.render(g2d, observer);
 	}
 
 	@Override
@@ -137,7 +156,6 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		}
 	}
 	
-	
 	public int getScore() {
 		return this.score;
 	}
@@ -169,5 +187,12 @@ public class Player extends Entity implements MouseListener, KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

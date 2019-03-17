@@ -19,16 +19,26 @@ public class Shield extends Entity implements MouseMotionListener{
 	private BufferedImage shield;
 	private float angle = 0f;
 	private Vec2 offset;
+	private Vec2 updatedPosition;
 
 	public Shield(Vec2 position) {
 		super(ID, position, 0, size, "shield");
 		shield = ImageLoader.loadImage("res/shield.png");
 		offset = new Vec2(0, 0);
+		updatedPosition = new Vec2(0, 0);
 	}
 
 	@Override
 	public void update() {
 		offset.setValue(getCoordinates(angle));
+	}
+	
+	public void update(float mouseX, float mouseY) {
+		float x = (mouseX/ GameWindow.WINDOW_SIZE.getX() - 0.5f) * 2f;
+		float y = (mouseY / GameWindow.WINDOW_SIZE.getY() - 0.5f) * 2f;
+		angle = getAngle(x, y, -90);
+		offset.setValue(getCoordinates(angle));
+		updatedPosition.setValue(new Vec2(position.getX()+offset.getX()-18, position.getY()+offset.getY()-18));
 	}
 	
 	@Override
@@ -40,7 +50,7 @@ public class Shield extends Entity implements MouseMotionListener{
 	
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
-		g2d.drawImage(shield, (int)(position.getX()+offset.getX()-18), (int)(position.getY()+offset.getY()-18), (int)size.getX(), (int)size.getY(), observer);
+		g2d.drawImage(shield, (int)(updatedPosition.getX()), (int)(updatedPosition.getY()), (int)size.getX(), (int)size.getY(), observer);
 	}
 	
 	private float getAngle(float x, float y, float offset) {
@@ -51,6 +61,10 @@ public class Shield extends Entity implements MouseMotionListener{
 		float x = (float) (RADIUS * Math.cos(angle));
 		float y = (float) (-RADIUS * Math.sin(angle));
 		return new Vec2(x, y);
+	}
+	
+	public Vec2 getUpdatedPosition() {
+		return updatedPosition;
 	}
 
 	@Override
