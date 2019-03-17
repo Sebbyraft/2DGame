@@ -70,14 +70,16 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 
 	private void collider() {
 		for(int i = 0; i < bullets.size(); i++) {
+			
+			// It detects any collision with the View Finder
 			float d = Maths.dist(bullets.get(i).getPosition(), viewFinder.getPosition());
 			if(d < (viewFinder.getSize().getX()/2+viewFinder.getSize().getY()/2)/2) {
 				bullets.remove(i);
 				score = score + 1;
 				return;
 			}
+			// It detects any collision with the Shield
 			d = Maths.dist(bullets.get(i).getPosition(), shield.getUpdatedPosition());
-			System.out.println(d);
 			if(d < (shield.getSize().getX()/2+shield.getSize().getY()/2)/2) {
 				bullets.remove(i);
 				if(score > 0)

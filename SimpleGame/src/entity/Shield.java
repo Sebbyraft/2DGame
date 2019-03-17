@@ -68,6 +68,5 @@ public class Shield extends Entity implements MouseMotionListener{
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-	}
+	public void mouseDragged(MouseEvent e) {};
 }

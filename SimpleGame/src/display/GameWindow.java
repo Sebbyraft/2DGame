@@ -17,7 +17,6 @@ public class GameWindow extends Canvas{
 	private static JFrame frame;
 	
 	public static final Vec2 WINDOW_SIZE = new Vec2(1280, 720);
-	
 	private static final String TITLE = "Game";
 	
 	public GameWindow(GameMainLoop game) {

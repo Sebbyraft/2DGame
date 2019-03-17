@@ -11,12 +11,12 @@ import toolkit.Vec2;
 
 public class ViewFinder extends Entity{
 	
-	private static final int NEW_POSITION_TIME = 1000;
 	private static final String ID = "view_finder";
 	
 	private Random r = new Random();
 	private int newPosition = 0;
 	private BufferedImage img;
+	private int level = 1000;
 	
 	public ViewFinder(Vec2 position) {
 		super(ID, position, 0, new Vec2(64, 64), "viewFinder");
@@ -24,7 +24,7 @@ public class ViewFinder extends Entity{
 	}
 	
 	public void update(Player p) {
-		if(newPosition > NEW_POSITION_TIME * (1 + r.nextInt(3))) {
+		if(newPosition > level) {
 			switch (r.nextInt(4)) {
 			case 0:
 				position.setValue(new Vec2(p.getPosition().getX()+p.getSize().getX()/2-size.getX()/2, 0));
@@ -51,11 +51,12 @@ public class ViewFinder extends Entity{
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.drawImage(img, (int)(position.getX()), (int)(position.getY()), (int)(size.getX()), (int)(size.getY()), observer);	
 	}
+	
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update() {};
 
 }

@@ -75,20 +75,12 @@ public class GameMainLoop extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D)g;
 		
-		//*************************************************************************************************
-		//g2d.setColor(new Color(22, 22, 22));
-		//g2d.fillRect(0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY());
-		g2d.drawImage(background, 0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY(), this);
-		//*************************************************************************************************
-		
-		
-		
+
 		if(menu.getMenuStatus() == false) {
 			update();
 		}
 		render(g2d, this);
 		
-		//*************************************************************************************************
 
 		g.dispose();
 		bs.show();
@@ -107,6 +99,11 @@ public class GameMainLoop extends Canvas implements Runnable{
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
+		
+		//*************************************************************************************************
+		g2d.drawImage(background, 0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY(), this);
+		//*************************************************************************************************
+		
 		score.render(g2d, this);
 		player.render(g2d, observer);
 		//shield.render(g2d, observer);
