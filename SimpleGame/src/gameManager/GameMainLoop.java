@@ -80,7 +80,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		g2d.drawImage(background, 0, 0, (int)GameWindow.WINDOW_SIZE.getX(), (int)GameWindow.WINDOW_SIZE.getY(), this);
 		//*************************************************************************************************
 		
-		score.render(g2d, this);
+		
 		
 		if(menu.getMenuStatus() == false) {
 			update();
@@ -98,10 +98,15 @@ public class GameMainLoop extends Canvas implements Runnable{
 		player.setUpgrade(score.getUpdate(player.getScore()));
 		shield.update();
 		menuItems.update();
+		if(menuItems.getReset()) {
+			player.setScore(0);
+			menuItems.setReset(false);
+		}
 		score.update(player.getScore());
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
+		score.render(g2d, this);
 		player.render(g2d, observer);
 		shield.render(g2d, observer);
 		menu.render(g2d, observer);

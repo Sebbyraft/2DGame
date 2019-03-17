@@ -35,7 +35,7 @@ public class Shield extends Entity implements MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		float x = (e.getX() / GameWindow.WINDOW_SIZE.getX() - 0.5f) * 2f;
 		float y = (e.getY() / GameWindow.WINDOW_SIZE.getY() - 0.5f) * 2f;
-		angle = getAngle(x, y, 0);
+		angle = getAngle(x, y, -90);
 	}
 	
 	@Override

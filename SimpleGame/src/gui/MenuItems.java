@@ -17,6 +17,7 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 	
 	private List<GuiElement> menuItems;
 	private Menu m;
+	private boolean reset = false;
 
 	public MenuItems(Menu m) {
 		menuItems = new ArrayList<GuiElement>();
@@ -78,7 +79,7 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 					if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
 						System.out.println(menuItem.getId());
 						if(menuItem.getId().equalsIgnoreCase("menu_item_0")) {
-							
+							reset = true;
 						} else if(menuItem.getId().equalsIgnoreCase("command")) {
 							ArrayList<String> text = StringLoader.loadStrings("text/"+menuItem.getId()+".txt");
 							for(int i = 0; i < text.size(); i++) {
@@ -106,6 +107,14 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 		for(GuiElement  menuItem: menuItems) {
 			menuItems.remove(menuItem);
 		}
+	}
+	
+	public boolean getReset() {
+		return reset;
+	}
+	
+	public void setReset(boolean reset) {
+		this.reset = reset;
 	}
 	
 	@Override

@@ -32,7 +32,7 @@ public class ScoreText extends GuiElement{
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.setColor(COLOR_2);
 		g2d.setStroke(new BasicStroke(5));
-		g2d.drawRect((int)position.getX()-8,(int)position.getY()-FONT_SIZE-4, (int)scoreStr.length()*FONT_SIZE*2/3, FONT_SIZE + 10);
+		g2d.drawRect((int)position.getX()-8,(int)position.getY()-FONT_SIZE-4, (int)scoreStr.length()*FONT_SIZE*2/3-20, FONT_SIZE + 10);
 		g2d.setColor(COLOR_1);
 		g2d.setFont(new Font("SimplyRounded", Font.BOLD, FONT_SIZE));
 		g2d.drawString(scoreStr , position.getX(), position.getY()-2);

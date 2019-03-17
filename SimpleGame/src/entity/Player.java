@@ -76,7 +76,6 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		
 		renderbullets(g2d, observer);
 		viewFinder.render(g2d, observer);
-		System.out.println(fire);
 	}
 
 	@Override
@@ -141,6 +140,10 @@ public class Player extends Entity implements MouseListener, KeyListener{
 	
 	public int getScore() {
 		return this.score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
 	}
 	
 	public void setUpgrade(int upgrade) {
