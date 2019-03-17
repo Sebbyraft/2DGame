@@ -95,14 +95,16 @@ public class GameMainLoop extends Canvas implements Runnable{
 	
 	public void update() {
 		player.update();
+		player.setUpgrade(score.getUpdate(player.getScore()));
 		shield.update();
+		menuItems.update();
+		score.update(player.getScore());
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		player.render(g2d, observer);
 		shield.render(g2d, observer);
 		menu.render(g2d, observer);
-		score.update(player.getScore());
 		menuItems.render(g2d, observer);
 	}
 	

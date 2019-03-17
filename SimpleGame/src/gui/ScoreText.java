@@ -43,4 +43,8 @@ public class ScoreText extends GuiElement{
 		// TODO Auto-generated method stub
 	}
 
+	public int getUpdate(int score) {
+		return 1 + score / 30;
+	} 
+
 }

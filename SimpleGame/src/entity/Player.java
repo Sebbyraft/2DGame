@@ -18,8 +18,7 @@ import toolkit.Vec2;
 public class Player extends Entity implements MouseListener, KeyListener{
 	
 	private static final String ID = "player";
-	
-	private static final int MAX_N_BULLETS = 5;
+
 	private static final int MAX_BULLETS_DISTANCE = 700;
 
 	private static float rotation = 0;
@@ -29,6 +28,8 @@ public class Player extends Entity implements MouseListener, KeyListener{
 	private BufferedImage playerImg;
 	private ViewFinder viewFinder;
 	private int score = 0;
+	private boolean fire = false;
+	private int upgrade = 1;
 	
 	public Player(Vec2 position, Vec2 size) {
 		super(ID, position, rotation, size, "test");
@@ -41,11 +42,23 @@ public class Player extends Entity implements MouseListener, KeyListener{
 
 	@Override
 	public void update() {
+		fire();
 		updatebullets();
 		viewFinder.update(this);
 		collider();
 	}
 	
+	private void fire() {
+		if(fire == true) {
+			if(bullets.size() < upgrade) {
+				float x = position.getX() + size.getX()/2 - 4;
+				float y = position.getY() + size.getY()/2 - 4;
+				bullets.add(new Bullet(new Vec2(x, y), direction));
+				return;
+			}
+		}
+	}
+
 	private void collider() {
 		for(int i = 0; i < bullets.size(); i++) {
 			float d = Maths.dist(bullets.get(i).getPosition(), viewFinder.getPosition());
@@ -63,18 +76,32 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		
 		renderbullets(g2d, observer);
 		viewFinder.render(g2d, observer);
+		System.out.println(fire);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// Fire
-		if(e.getButton() == 1) { 
-			if(bullets.size() < MAX_N_BULLETS) {
-				float x = position.getX() + size.getX()/2 - 4;
-				float y = position.getY() + size.getY()/2 - 4;
-				bullets.add(new Bullet(new Vec2(x, y), direction));
-				return;
+		if(e.getButton() == 3) {
+			if(fire == false) {
+				fire = true;
+			} else {
+				fire = false;
 			}
+		}
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if(e.getButton() == 1) { 
+			fire = true;
+		} 
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if(e.getButton() == 1) {
+			if(fire == true)
+				fire = false;
 		}
 	}
 	
@@ -115,6 +142,10 @@ public class Player extends Entity implements MouseListener, KeyListener{
 	public int getScore() {
 		return this.score;
 	}
+	
+	public void setUpgrade(int upgrade) {
+		this.upgrade = upgrade;
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
@@ -123,16 +154,6 @@ public class Player extends Entity implements MouseListener, KeyListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 	}
 

@@ -1,2 +1,2 @@
- USE W-A-S-D TO CHANGE DIRECTION
- USE THE LEFT MOUSE BUTTON TO FIRE
+Use W-A-S-D to change direction
+Use the left mouse button to fire

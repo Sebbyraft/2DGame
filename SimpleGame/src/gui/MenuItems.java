@@ -30,7 +30,14 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 	}
 	
 	public void update() {
-
+		if(m.getMenuStatus() == false) {
+			for(GuiElement  menuItem: menuItems) {
+				if(menuItem.getId().equalsIgnoreCase("text")) {
+					menuItems.remove(menuItem);
+					return;
+				}
+			}
+		}
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
@@ -48,7 +55,9 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 			for(GuiElement  menuItem: menuItems) {
 				float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
 				if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
-					menuItem.changeColor(new Color(0, 0, 200));
+					if(!menuItem.getId().equalsIgnoreCase("text")){
+						menuItem.changeColor(new Color(0, 0, 200));
+					}
 				} else {
 					menuItem.changeColor(new Color(255, 255, 255));
 				}
@@ -73,11 +82,10 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 						} else if(menuItem.getId().equalsIgnoreCase("command")) {
 							ArrayList<String> text = StringLoader.loadStrings("text/"+menuItem.getId()+".txt");
 							for(int i = 0; i < text.size(); i++) {
-								MenuItem cmds = new MenuItem(menuItem.getId()+"_text", new Vec2(m.getPosition().getX(), 300+i*30), text.get(i));
+								MenuItem cmds = new MenuItem("text", new Vec2(m.getPosition().getX(), 300+i*30), text.get(i));
 								cmds.setFontSize(24);
 								menuItems.add(cmds);
 							}
-							
 							return;
 						}
 					}
