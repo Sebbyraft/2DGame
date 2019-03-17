@@ -21,9 +21,9 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 	public MenuItems(Menu m) {
 		menuItems = new ArrayList<GuiElement>();
 		
-		Vec2 pos = new Vec2(m.getPosition().getX() + 200, m.getPosition().getY() + 100);
+		Vec2 pos = new Vec2(m.getPosition().getX(), m.getPosition().getY() + 100);
 		menuItems.add(new MenuItem("menu_item_0", pos , "RESET"));
-		pos = new Vec2(m.getPosition().getX() + 200, m.getPosition().getY() + 200);
+		pos = new Vec2(m.getPosition().getX(), m.getPosition().getY() + 200);
 		menuItems.add(new MenuItem("command", pos , "COMMAND"));
 		
 		this.m = m;
@@ -48,7 +48,7 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 			for(GuiElement  menuItem: menuItems) {
 				float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
 				if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
-					menuItem.changeColor(new Color(200, 0, 0));
+					menuItem.changeColor(new Color(0, 0, 200));
 				} else {
 					menuItem.changeColor(new Color(255, 255, 255));
 				}
@@ -59,21 +59,27 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(m.getMenuStatus() == true) {
-			Vec2 mouse = new Vec2(e.getX(), e.getY());
-			
-			for(GuiElement  menuItem: menuItems) {
-				float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
+		if(e.getButton() == 1) {
+			if(m.getMenuStatus() == true) {
+				Vec2 mouse = new Vec2(e.getX(), e.getY());
 				
-				if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
-					System.out.println(menuItem.getId());
-					if(menuItem.getId().equalsIgnoreCase("menu_item_0")) {
-						
-					} else if(menuItem.getId().equalsIgnoreCase("command")) {
-						String text = StringLoader.loadString("text/"+menuItem.getId()+".txt");
-						System.out.println(text);
-						menuItems.add(new MenuItem(menuItem.getId()+"_text", new Vec2(300, 300), text));
-						return;
+				for(GuiElement  menuItem: menuItems) {
+					float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
+					
+					if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
+						System.out.println(menuItem.getId());
+						if(menuItem.getId().equalsIgnoreCase("menu_item_0")) {
+							
+						} else if(menuItem.getId().equalsIgnoreCase("command")) {
+							ArrayList<String> text = StringLoader.loadStrings("text/"+menuItem.getId()+".txt");
+							for(int i = 0; i < text.size(); i++) {
+								MenuItem cmds = new MenuItem(menuItem.getId()+"_text", new Vec2(m.getPosition().getX(), 300+i*30), text.get(i));
+								cmds.setFontSize(24);
+								menuItems.add(cmds);
+							}
+							
+							return;
+						}
 					}
 				}
 			}

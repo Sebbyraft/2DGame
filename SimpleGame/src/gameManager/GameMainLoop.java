@@ -13,7 +13,6 @@ import entity.Player;
 import entity.Shield;
 import gui.ScoreText;
 import gui.Menu;
-import gui.MenuItem;
 import gui.MenuItems;
 import loader.ImageLoader;
 import toolkit.Vec2;
