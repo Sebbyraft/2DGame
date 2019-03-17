@@ -15,7 +15,7 @@ import gui.ScoreText;
 import gui.Menu;
 import gui.MenuItem;
 import gui.MenuItems;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Vec2;
 
 public class GameMainLoop extends Canvas implements Runnable{
@@ -48,13 +48,14 @@ public class GameMainLoop extends Canvas implements Runnable{
 		shield = new Shield(new Vec2(GameWindow.WINDOW_SIZE.getX()/2, GameWindow.WINDOW_SIZE.getY()/2));
 		this.addMouseMotionListener(shield);
 		
-		background = Loader.loadImage("res/background.png");
+		background = ImageLoader.loadImage("res/background.png");
 
 		menu = new Menu(new Vec2(30, 30));
 		this.addMouseListener(menu);
 		this.addMouseMotionListener(menu);
 		menuItems = new MenuItems(menu);
 		this.addMouseMotionListener(menuItems);
+		this.addMouseListener(menuItems);
 		
 		score = new ScoreText("score", new Vec2(200, 60));
 	
@@ -84,9 +85,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		
 		if(menu.getMenuStatus() == false) {
 			update();
-			
 		}
-		
 		render(g2d, this);
 		
 		//*************************************************************************************************

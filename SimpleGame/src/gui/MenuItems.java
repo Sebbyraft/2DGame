@@ -9,6 +9,7 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 
+import loader.StringLoader;
 import toolkit.Vec2;
 
 
@@ -23,9 +24,13 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 		Vec2 pos = new Vec2(m.getPosition().getX() + 200, m.getPosition().getY() + 100);
 		menuItems.add(new MenuItem("menu_item_0", pos , "RESET"));
 		pos = new Vec2(m.getPosition().getX() + 200, m.getPosition().getY() + 200);
-		menuItems.add(new MenuItem("menu_item_1", pos , "HELP"));
+		menuItems.add(new MenuItem("command", pos , "COMMAND"));
 		
 		this.m = m;
+	}
+	
+	public void update() {
+
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
@@ -40,10 +45,8 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 	public void mouseMoved(MouseEvent e) {
 		if(m.getMenuStatus() == true) {
 			Vec2 mouse = new Vec2(e.getX(), e.getY());
-			
 			for(GuiElement  menuItem: menuItems) {
 				float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
-				
 				if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
 					menuItem.changeColor(new Color(200, 0, 0));
 				} else {
@@ -56,8 +59,25 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(m.getMenuStatus() == true) {
+			Vec2 mouse = new Vec2(e.getX(), e.getY());
+			
+			for(GuiElement  menuItem: menuItems) {
+				float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
+				
+				if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
+					System.out.println(menuItem.getId());
+					if(menuItem.getId().equalsIgnoreCase("menu_item_0")) {
+						
+					} else if(menuItem.getId().equalsIgnoreCase("command")) {
+						String text = StringLoader.loadString("text/"+menuItem.getId()+".txt");
+						System.out.println(text);
+						menuItems.add(new MenuItem(menuItem.getId()+"_text", new Vec2(300, 300), text));
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	public boolean mouseOver(Vec2 mouse, Vec2 position, Vec2 size) {
@@ -66,6 +86,12 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 				return true;
 			} else return false;
 		}else return false;
+	}
+	
+	public void cleanUp() {
+		for(GuiElement  menuItem: menuItems) {
+			menuItems.remove(menuItem);
+		}
 	}
 	
 	@Override

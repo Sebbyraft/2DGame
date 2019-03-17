@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import display.GameWindow;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Vec2;
 
 public class Shield extends Entity implements MouseMotionListener{
@@ -22,7 +22,7 @@ public class Shield extends Entity implements MouseMotionListener{
 
 	public Shield(Vec2 position) {
 		super(ID, position, 0, size, "shield");
-		shield = Loader.loadImage("res/shield.png");
+		shield = ImageLoader.loadImage("res/shield.png");
 		offset = new Vec2(0, 0);
 	}
 

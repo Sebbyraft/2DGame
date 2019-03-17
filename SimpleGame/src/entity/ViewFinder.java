@@ -6,7 +6,7 @@ import java.awt.image.ImageObserver;
 import java.util.Random;
 
 import display.GameWindow;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Vec2;
 
 public class ViewFinder extends Entity{
@@ -20,7 +20,7 @@ public class ViewFinder extends Entity{
 	
 	public ViewFinder(Vec2 position) {
 		super(ID, position, 0, new Vec2(64, 64), "viewFinder");
-		img = Loader.loadImage("res/pointer.png");
+		img = ImageLoader.loadImage("res/pointer.png");
 	}
 	
 	public void update(Player p) {

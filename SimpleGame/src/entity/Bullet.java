@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import entity.Entity;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Vec2;
 
 public class Bullet extends Entity{
@@ -18,7 +18,7 @@ public class Bullet extends Entity{
 	public Bullet(Vec2 position, Vec2 direction) {
 		super(ID, position, 0, new Vec2(8, 8), "bullet");
 		this.direction = direction;
-		projectileImage = Loader.loadImage("res/bullet.png");
+		projectileImage = ImageLoader.loadImage("res/bullet.png");
 	}
 
 	@Override

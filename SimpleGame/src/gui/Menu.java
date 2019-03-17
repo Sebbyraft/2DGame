@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 import display.GameWindow;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Vec2;
 
 public class Menu extends GuiElement implements MouseListener, MouseMotionListener{
@@ -28,7 +28,7 @@ public class Menu extends GuiElement implements MouseListener, MouseMotionListen
 	public Menu(Vec2 position) {
 		super(ID, position, SIZE);
 		color = COLOR_2;
-		image = Loader.loadImage("res/gui/menu.png");
+		image = ImageLoader.loadImage("res/gui/menu.png");
 	}
 
 	@Override

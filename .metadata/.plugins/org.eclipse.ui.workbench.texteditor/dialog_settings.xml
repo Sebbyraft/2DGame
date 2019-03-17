@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="729" key="DIALOG_X_ORIGIN"/>
+		<item value="404" key="DIALOG_Y_ORIGIN"/>
+	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="swpawn" key="selection"/>
+		<item value="bullets" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="projectiles"/>
+			<item value="img"/>
+			<item value="entities"/>
+			<item value="players"/>
 			<item value="moving"/>
 			<item value="spowning"/>
 			<item value="System.out.printl"/>
@@ -17,6 +25,10 @@
 			<item value="name"/>
 		</list>
 		<list key="replacehistory">
+			<item value="bullets"/>
+			<item value="playerImg"/>
+			<item value="entity"/>
+			<item value="entities"/>
 			<item value="swpawn"/>
 			<item value=""/>
 			<item value="plantes"/>

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import display.GameWindow;
 import entity.Entity;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Maths;
 import toolkit.Vec2;
 
@@ -36,7 +36,7 @@ public class Player extends Entity implements MouseListener, KeyListener{
 		bullets = new ArrayList<Bullet>();
 		direction = new Vec2(1, 0);
 		viewFinder = new ViewFinder(new Vec2(GameWindow.WINDOW_SIZE.getX()-64, position.getY()+size.getY()/2-32));
-		playerImg = Loader.loadImage("res/player.png");
+		playerImg = ImageLoader.loadImage("res/player.png");
 	}
 
 	@Override

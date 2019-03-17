@@ -13,7 +13,7 @@ import java.util.Random;
 
 import display.GameWindow;
 import entity.Entity;
-import loader.Loader;
+import loader.ImageLoader;
 import toolkit.Maths;
 import toolkit.Vec2;
 
@@ -43,8 +43,8 @@ public class TestEntity extends Entity implements MouseMotionListener, MouseList
 		direction = new Vec2(1, 0);
 		viewfinder = new Vec2(0, 0);
 		this.viewfinder.setValue(new Vec2(GameWindow.WINDOW_SIZE.getX()-40, position.getY()+size.getY()/2-16));
-		playerImg = Loader.loadImage("res/player.png");
-		playerViewfinder = Loader.loadImage("res/pointer.png");
+		playerImg = ImageLoader.loadImage("res/player.png");
+		playerViewfinder = ImageLoader.loadImage("res/pointer.png");
 	}
 
 	@Override
