@@ -32,6 +32,7 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 	private boolean fire = false;
 	private int upgrade = 1;
 	private Shield shield;
+	private int life = 10;
 	
 	public Player(Vec2 position, Vec2 size) {
 		super(ID, position, rotation, size, "test");
@@ -93,7 +94,7 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.rotate(rotation, (int)(position.getX()+size.getX()/2), (int)(position.getY()+size.getY()/2));
 		g2d.drawImage(playerImg, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
-		
+
 		renderbullets(g2d, observer);
 		viewFinder.render(g2d, observer);
 		shield.render(g2d, observer);
@@ -168,6 +169,24 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 	
 	public void setUpgrade(int upgrade) {
 		this.upgrade = upgrade;
+	}
+	
+	public Shield getShield() {
+		return this.shield;
+	}
+	
+	public int getLife() {
+		return this.life;
+	}
+	
+	public void setLife(int life) {
+		this.life = life;
+	}
+	
+	public void decreaseLife() {
+		if(life>0) {
+			life --;
+		}
 	}
 
 	@Override

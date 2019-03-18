@@ -9,6 +9,7 @@ import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 import display.GameWindow;
+import entity.EnemiesHandler;
 import entity.Enemy;
 import entity.Player;
 import entity.Shield;
@@ -34,7 +35,8 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public Menu menu;
 	public MenuItems menuItems;
 	public ScoreText score;
-	public Enemy enemy;
+	
+	public EnemiesHandler enemiesHandler;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -62,8 +64,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		score = new ScoreText("score", new Vec2(200, 60));
 		
 		
-		enemy = new Enemy(null);
-	
+		enemiesHandler = new EnemiesHandler(player);
 		//****************************************************************************
 		new GameWindow(this);
 	}
@@ -86,9 +87,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		}
 		render(g2d, this);
 		
-		enemy.render(g2d,this);
-		enemy.update();
-		
+
 
 		g.dispose();
 		bs.show();
@@ -104,6 +103,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 			menuItems.setReset(false);
 		}
 		score.update(player.getScore());
+		enemiesHandler.update();
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
@@ -117,6 +117,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		//shield.render(g2d, observer);
 		menu.render(g2d, observer);
 		menuItems.render(g2d, observer);
+		enemiesHandler.render(g2d, observer);
 	}
 	
 
