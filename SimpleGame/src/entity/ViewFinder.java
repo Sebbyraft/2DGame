@@ -15,8 +15,8 @@ public class ViewFinder extends Entity{
 	
 	private Random r = new Random();
 	private int newPosition = 0;
-	private BufferedImage img;
 	private int level = 1000;
+	private BufferedImage img;
 	
 	public ViewFinder(Vec2 position) {
 		super(ID, position, 0, new Vec2(64, 64), "viewFinder");

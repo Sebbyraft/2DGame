@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
-<fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
-<fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction"/>
-<fullyQualifiedTypeName name="structures.Vec3"/>
-<fullyQualifiedTypeName name="entities.PlanetsManager"/>
-<fullyQualifiedTypeName name="structures.Vec4"/>
-<fullyQualifiedTypeName name="java.awt.event.MouseWheelListener"/>
-<fullyQualifiedTypeName name="java.awt.Stroke"/>
-<fullyQualifiedTypeName name="java.awt.BasicStroke"/>
 <fullyQualifiedTypeName name="structures.Vec2"/>
 <fullyQualifiedTypeName name="gui.MapButton"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
@@ -35,12 +26,10 @@
 <fullyQualifiedTypeName name="java.awt.image.BufferStrategy"/>
 <fullyQualifiedTypeName name="entity.Entity"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="entity.Shield"/>
 <fullyQualifiedTypeName name="display.GameWindow"/>
 <fullyQualifiedTypeName name="toolkit.Maths"/>
 <fullyQualifiedTypeName name="gui.GuiManager"/>
 <fullyQualifiedTypeName name="gui.MenuButton"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javax.swing.GrayFilter"/>
 <fullyQualifiedTypeName name="java.util.Observer"/>
 <fullyQualifiedTypeName name="java.awt.image.ImageObserver"/>
@@ -48,16 +37,27 @@
 <fullyQualifiedTypeName name="loader.Loader"/>
 <fullyQualifiedTypeName name="gui.GuiText"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
-<fullyQualifiedTypeName name="java.awt.event.MouseMotionListener"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="java.awt.image.renderable.RenderableImage"/>
 <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
 <fullyQualifiedTypeName name="gui.Menu"/>
-<fullyQualifiedTypeName name="gui.MenuItem"/>
 <fullyQualifiedTypeName name="gui.MenuItems"/>
-<fullyQualifiedTypeName name="gui.GuiElement"/>
-<fullyQualifiedTypeName name="toolkit.Vec2"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="loader.StringLoader"/>
+<fullyQualifiedTypeName name="javax.print.attribute.standard.MediaSizeName"/>
+<fullyQualifiedTypeName name="gui.GuiElement"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="gui.SimpleText"/>
+<fullyQualifiedTypeName name="gui.MenuItem"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.Line"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="entity.Shield"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseMotionListener"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="toolkit.Vec2"/>
 </qualifiedTypeNameHistroy>
