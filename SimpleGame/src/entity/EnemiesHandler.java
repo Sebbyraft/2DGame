@@ -35,7 +35,6 @@ public class EnemiesHandler {
 		collider();
 	}
 
-
 	private void spawner() {
 		if(newEnemy > level) {
 			enemies.add(new Enemy(new Vec2(0, 0)));
@@ -44,7 +43,6 @@ public class EnemiesHandler {
 		} else {
 			newEnemy ++;
 		}
-		
 	}
 
 	private void collider() {
@@ -59,18 +57,12 @@ public class EnemiesHandler {
 			// It detects any collision with the player
 			Vec2 playerPos = new Vec2(player.getPosition().getX()*1.09f, player.getPosition().getY()*1.09f);
 			d = Maths.dist(enemies.get(i).getPosition(), playerPos);
-			System.out.println(d);
 			if(d <= (player.getSize().getX()/2+player.getSize().getY()/2)) {
 				enemies.remove(i);
 				player.decreaseLife();
 				System.out.println(player.getLife());
 				return;
 			}
-		}
-		
+		}	
 	}
-	
-	
-	
-
 }

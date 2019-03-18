@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import display.GameWindow;
 import entity.EnemiesHandler;
-import entity.Enemy;
 import entity.Player;
 import entity.Shield;
 import gui.ScoreText;

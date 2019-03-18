@@ -61,7 +61,6 @@ public class Enemy extends Entity{
 	@Override
 	public void render(Graphics2D g2d, ImageObserver observer) {
 		g2d.drawImage(enemyImg, (int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY(), observer);
-		//g2d.drawRect((int)position.getX(), (int)position.getY(), (int)size.getX(), (int)size.getY());
 	}
 
 }
