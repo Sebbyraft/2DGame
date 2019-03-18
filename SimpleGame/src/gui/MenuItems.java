@@ -77,7 +77,6 @@ public class MenuItems implements MouseMotionListener, MouseListener{
 					float posY = menuItem.getPosition().getY() -  menuItem.getSize().getY();
 					
 					if(mouseOver(mouse, new Vec2(menuItem.getPosition().getX(), posY), menuItem.getSize())){
-						System.out.println(menuItem.getId());
 						if(menuItem.getId().equalsIgnoreCase("menu_item_0")) {
 							reset = true;
 						} else if(menuItem.getId().equalsIgnoreCase("command")) {
