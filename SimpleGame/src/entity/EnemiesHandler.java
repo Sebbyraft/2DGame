@@ -12,7 +12,7 @@ public class EnemiesHandler {
 	private ArrayList<Enemy> enemies;
 	private Player player;
 	private int newEnemy = 0;
-	private int level = 1000;
+	private int level = 300;
 	private Shield shield;
 	
 	public EnemiesHandler(Player player) {
@@ -64,5 +64,11 @@ public class EnemiesHandler {
 				return;
 			}
 		}	
+	}
+	
+	public void cleanUp() {
+		for(int i = 0; i < enemies.size(); i++) {
+			enemies.remove(i);
+		}
 	}
 }

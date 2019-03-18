@@ -13,6 +13,7 @@ import entity.EnemiesHandler;
 import entity.Player;
 import entity.Shield;
 import gui.ScoreText;
+import gui.LifeIndicator;
 import gui.Menu;
 import gui.MenuItems;
 import loader.ImageLoader;
@@ -36,6 +37,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 	public ScoreText score;
 	
 	public EnemiesHandler enemiesHandler;
+	public LifeIndicator indicator;
 	
 	public static void main(String[] args) throws IOException{
 		new GameMainLoop();
@@ -61,9 +63,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 		this.addMouseListener(menuItems);
 		
 		score = new ScoreText("score", new Vec2(200, 60));
-		
-		
+	
 		enemiesHandler = new EnemiesHandler(player);
+		
+		indicator = new LifeIndicator(new Vec2(50+GameWindow.WINDOW_SIZE.getX()-400, 30), player);
 		//****************************************************************************
 		new GameWindow(this);
 	}
@@ -100,9 +103,12 @@ public class GameMainLoop extends Canvas implements Runnable{
 		if(menuItems.getReset()) {
 			player.setScore(0);
 			menuItems.setReset(false);
+			player.restoreLife();
+			enemiesHandler.cleanUp();
 		}
 		score.update(player.getScore());
 		enemiesHandler.update();
+		indicator.update();
 	}
 	
 	public void render(Graphics2D g2d, ImageObserver observer) {
@@ -117,6 +123,7 @@ public class GameMainLoop extends Canvas implements Runnable{
 		menu.render(g2d, observer);
 		menuItems.render(g2d, observer);
 		enemiesHandler.render(g2d, observer);
+		indicator.render(g2d, observer);
 	}
 	
 

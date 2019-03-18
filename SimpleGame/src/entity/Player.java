@@ -21,6 +21,7 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 	private static final String ID = "player";
 
 	private static final int MAX_BULLETS_DISTANCE = 700;
+	private static final int MAX_LIFE = 10;
 
 	private static float rotation = 0;
 	private Vec2 direction;
@@ -181,6 +182,10 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 	
 	public void setLife(int life) {
 		this.life = life;
+	}
+	
+	public void restoreLife() {
+		this.life = MAX_LIFE;
 	}
 	
 	public void decreaseLife() {
