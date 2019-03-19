@@ -71,4 +71,10 @@ public class EnemiesHandler {
 			enemies.remove(i);
 		}
 	}
+	
+	public void reset() {
+		cleanUp();
+	}
+	
+	
 }

@@ -53,7 +53,6 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 		collider();
 	}
 	
-
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		shield.update(e.getX(), e.getY());
@@ -192,6 +191,17 @@ public class Player extends Entity implements MouseListener, MouseMotionListener
 		if(life>0) {
 			life --;
 		}
+	}
+	
+	public void cleanUp() {
+		for(Bullet p:bullets) {
+			bullets.remove(p);
+		}
+	}
+	
+	public void reset() {
+		this.life = MAX_LIFE;
+		this.score = 0;
 	}
 
 	@Override

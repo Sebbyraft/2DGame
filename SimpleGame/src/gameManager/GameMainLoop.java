@@ -88,8 +88,6 @@ public class GameMainLoop extends Canvas implements Runnable{
 			update();
 		}
 		render(g2d, this);
-		
-
 
 		g.dispose();
 		bs.show();
@@ -100,11 +98,10 @@ public class GameMainLoop extends Canvas implements Runnable{
 		player.setUpgrade(score.getUpdate(player.getScore()));
 		//shield.update();
 		menuItems.update();
-		if(menuItems.getReset()) {
-			player.setScore(0);
+		if(menuItems.getReset() || player.getLife() <= 0) {
 			menuItems.setReset(false);
-			player.restoreLife();
-			enemiesHandler.cleanUp();
+			player.reset();
+			enemiesHandler.reset();
 		}
 		score.update(player.getScore());
 		enemiesHandler.update();

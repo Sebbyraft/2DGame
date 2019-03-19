@@ -1,2 +1,6 @@
-Use W-A-S-D to change direction
-Use the left mouse button to fire
+ - Use W-A-S-D to change direction
+
+ - Use the left mouse button to fire
+
+ - Use the right mouse button to use
+   continuos fire mode
